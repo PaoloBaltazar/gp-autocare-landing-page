@@ -1,0 +1,9 @@
+<svg width="100%" viewBox="0 0 480 160" role="img" xmlns="http://www.w3.org/2000/svg"><title>GP Autocare</title><desc>GP Autocare logo: a circular GP monogram badge with sparkle marks beside the GP Autocare wordmark and a professional auto detailing tagline.</desc><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&family=IBM+Plex+Mono:wght@500&display=swap');</style>
+<circle cx="72" cy="80" r="58" fill="#10151C"/>
+<circle cx="72" cy="80" r="50.5" fill="none" stroke="#2E8BE0" stroke-width="2.9"/>
+<text x="72" y="80" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="47.6" letter-spacing="0.6" fill="#F3EFE7" text-anchor="middle" dominant-baseline="central">GP</text>
+<path d="M 106.8 30.12 Q 106.8 45.2 121.88 45.2 Q 106.8 45.2 106.8 60.28 Q 106.8 45.2 91.72 45.2 Q 106.8 45.2 106.8 30.12 Z" fill="#2E8BE0"/>
+<path d="M 37.2 101.46 Q 37.2 109 44.74 109 Q 37.2 109 37.2 116.54 Q 37.2 109 29.66 109 Q 37.2 109 37.2 101.46 Z" fill="#2E8BE0"/>
+<text x="162" y="78" font-family="'Space Grotesk', system-ui, sans-serif" font-size="46"><tspan font-weight="700" fill="#2E8BE0">GP</tspan><tspan font-weight="600" fill="#10151C"> Autocare</tspan></text>
+<text x="164" y="108" font-family="'IBM Plex Mono', ui-monospace, monospace" font-weight="500" font-size="13" letter-spacing="3" fill="#1A5C99">PROFESSIONAL AUTO DETAILING</text>
+</svg>

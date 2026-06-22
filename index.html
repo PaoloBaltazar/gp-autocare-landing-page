@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GP Autocare — Professional Auto Detailing</title>
+  <meta name="description" content="GP Autocare is an auto detailing shop that brings back that new-car feeling.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+  <style>
+    :root {
+      --ink: #10151C;
+      --azure: #2E8BE0;
+      --cream: #F3EFE7;
+
+      /* Light theme (default) */
+      --bg: var(--cream);
+      --text: var(--ink);
+      --text-muted: rgba(16,21,28,0.85);
+      --tagline: #1A5C99;
+      --badge-fill: var(--ink);
+      --badge-mono: var(--cream);
+      --footer-bg: var(--ink);
+      --footer-text: var(--cream);
+      --footer-tag: #7FB4E0;
+      --footer-copy: rgba(243,239,231,0.5);
+      --toggle-border: rgba(16,21,28,0.15);
+    }
+
+    html[data-theme="dark"] {
+      --bg: var(--ink);
+      --text: var(--cream);
+      --text-muted: rgba(243,239,231,0.82);
+      --tagline: #7FB4E0;
+      --badge-fill: var(--cream);
+      --badge-mono: var(--ink);
+      --footer-bg: #19212B;
+      --footer-text: var(--cream);
+      --footer-tag: #7FB4E0;
+      --footer-copy: rgba(243,239,231,0.5);
+      --toggle-border: rgba(243,239,231,0.2);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Theme toggle */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 100;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border: 1px solid var(--toggle-border);
+      border-radius: 50%;
+      background: var(--bg);
+      color: var(--text);
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .theme-toggle:hover { transform: scale(1.08); border-color: var(--azure); color: var(--azure); }
+    .theme-toggle svg { width: 20px; height: 20px; }
+    .theme-toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 96px 0 88px;
+    }
+
+    .hero__logo {
+      display: block;
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 28px;
+    }
+
+    .hero__name {
+      font-size: clamp(2rem, 6vw, 3.25rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    .hero__name span { color: var(--azure); }
+
+    .hero__tagline {
+      margin-top: 16px;
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--tagline);
+    }
+
+    .hero__cta {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 14px 32px;
+      background: var(--azure);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero__cta:hover { background: #2477c2; transform: translateY(-2px); }
+
+    /* Divider */
+    .divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(46,139,224,0.5), transparent);
+      border: none;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+
+    /* About */
+    .about {
+      padding: 80px 0;
+    }
+
+    .about__label {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.78rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--azure);
+      margin-bottom: 16px;
+    }
+
+    .about__heading {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .about__text {
+      font-size: 1.075rem;
+      max-width: 680px;
+      color: var(--text-muted);
+    }
+
+    .about__text + .about__text { margin-top: 18px; }
+
+    .about__cta {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 14px 32px;
+      background: var(--azure);
+      color: var(--cream);
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .about__cta:hover { background: #2477c2; transform: translateY(-2px); }
+
+    /* Footer */
+    .footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      padding: 56px 0;
+      transition: background 0.3s ease;
+    }
+
+    .footer__inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer__brand {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .footer__brand span { color: var(--azure); }
+
+    .footer__tag {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--footer-tag);
+      margin-top: 6px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.95rem;
+    }
+
+    .footer__links a {
+      color: var(--footer-text);
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s ease, color 0.2s ease;
+    }
+
+    .footer__links a:hover { opacity: 1; color: var(--azure); }
+
+    .footer__copyright {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--footer-copy);
+    }
+
+    @media (max-width: 560px) {
+      .hero { padding: 64px 0 56px; }
+      .about { padding: 56px 0; }
+      .footer__inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme toggle -->
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container">
+      <svg class="hero__logo" viewBox="0 0 140 140" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="GP Autocare logo">
+        <circle cx="70" cy="70" r="58" fill="var(--badge-fill)"/>
+        <circle cx="70" cy="70" r="50.5" fill="none" stroke="#2E8BE0" stroke-width="2.9"/>
+        <text x="70" y="70" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="47.6" letter-spacing="0.6" fill="var(--badge-mono)" text-anchor="middle" dominant-baseline="central">GP</text>
+        <path d="M 104.8 20.12 Q 104.8 35.2 119.88 35.2 Q 104.8 35.2 104.8 50.28 Q 104.8 35.2 89.72 35.2 Q 104.8 35.2 104.8 20.12 Z" fill="#2E8BE0"/>
+        <path d="M 35.2 91.46 Q 35.2 99 42.74 99 Q 35.2 99 35.2 106.54 Q 35.2 99 27.66 99 Q 35.2 99 35.2 91.46 Z" fill="#2E8BE0"/>
+      </svg>
+      <h1 class="hero__name">GP <span>Autocare</span></h1>
+      <p class="hero__tagline">Bringing back that new-car feeling</p>
+      <a class="hero__cta" href="#contact">Book a Detail</a>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- About -->
+  <main class="about">
+    <div class="container">
+      <p class="about__label">About</p>
+      <h2 class="about__heading">Detailing done right — not just a quick wash</h2>
+      <p class="about__text">
+        GP Autocare is a professional auto detailing shop dedicated to bringing back that new-car
+        feeling. We go beyond the surface — meticulous interior and exterior detailing, paint care,
+        and finishing that restores your vehicle to its best.
+      </p>
+      <p class="about__text">
+        We work with proud car owners — everyday drivers, busy professionals, and enthusiasts alike —
+        who want their vehicle to look and feel its best, and who are happy to invest in doing it
+        right rather than settling for shortcuts.
+      </p>
+      <a class="about__cta" href="#contact">Get in touch</a>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">GP <span>Autocare</span></div>
+          <div class="footer__tag">Professional Auto Detailing</div>
+        </div>
+        <nav class="footer__links">
+          <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
+          <a href="tel:+10000000000">(000) 000-0000</a>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">Facebook</a>
+        </nav>
+      </div>
+      <div class="footer__copyright">© 2026 GP Autocare. All rights reserved.</div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', theme);
+
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+  </script>
+
+</body>
+</html>
