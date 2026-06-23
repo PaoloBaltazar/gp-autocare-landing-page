@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping — GP Autocare</title>
+  <meta name="description" content="How GP Autocare ships its pro-grade detailing products and kits — methods, timelines, tracking and local pickup, explained plainly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+  <style>
+    :root {
+      --ink: #10151C; --ink-2: #0B0F14; --ink-rise: #1B2531;
+      --azure: #2E8BE0; --azure-soft: #7FB4E0; --azure-deep: #1A5C99; --cream: #F3EFE7;
+      --bg: #F6F3EC; --surface: #FFFFFF; --surface-2: #FBF9F3;
+      --text: var(--ink); --text-muted: rgba(16, 21, 28, 0.60); --text-faint: rgba(16, 21, 28, 0.42);
+      --hairline: rgba(16, 21, 28, 0.10); --hairline-strong: rgba(16, 21, 28, 0.18);
+      --eyebrow: var(--azure-deep); --nav-bg: rgba(246, 243, 236, 0.80);
+      --shadow: 0 24px 60px -34px rgba(16, 21, 28, 0.34); --shadow-sm: 0 10px 30px -20px rgba(16, 21, 28, 0.40);
+      --logo-light: none; --logo-dark: block;
+    }
+    html[data-theme="dark"] {
+      --bg: #0A0E13; --surface: #121922; --surface-2: #0E141B;
+      --text: var(--cream); --text-muted: rgba(243, 239, 231, 0.60); --text-faint: rgba(243, 239, 231, 0.40);
+      --hairline: rgba(243, 239, 231, 0.12); --hairline-strong: rgba(243, 239, 231, 0.20);
+      --eyebrow: var(--azure-soft); --nav-bg: rgba(10, 14, 19, 0.74);
+      --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7); --shadow-sm: 0 12px 30px -22px rgba(0, 0, 0, 0.8);
+      --logo-light: block; --logo-dark: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      color: var(--text); background: var(--bg); line-height: 1.6; overflow-x: hidden;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+    .wrap { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .serif { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 400; color: var(--azure); }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.26em; text-transform: uppercase; color: var(--eyebrow);
+    }
+    .section { padding: 96px 0; }
+    .section__title { font-size: clamp(1.7rem, 4.4vw, 2.7rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.025em; margin-top: 16px; }
+    .section__title .serif { font-size: 1.04em; line-height: 1; }
+    .section__sub { margin-top: 18px; font-size: 1.06rem; color: var(--text-muted); max-width: 56ch; }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px 22px; border-radius: 999px; white-space: nowrap;
+      font-family: inherit; font-weight: 600; font-size: 0.94rem; cursor: pointer; border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .btn svg { width: 15px; height: 15px; }
+    .btn--dark { background: var(--ink); color: var(--cream); }
+    .btn--dark:hover { background: var(--azure); color: #fff; transform: translateY(-2px); }
+    html[data-theme="dark"] .btn--dark { background: var(--cream); color: var(--ink); }
+    html[data-theme="dark"] .btn--dark:hover { background: var(--azure); color: #fff; }
+    .btn--primary { background: var(--azure); color: #fff; box-shadow: 0 12px 28px -14px rgba(46,139,224,0.9); }
+    .btn--primary:hover { background: #2477c2; transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--text); border-color: var(--hairline-strong); }
+    .btn--ghost:hover { border-color: var(--azure); color: var(--azure); transform: translateY(-2px); }
+
+    /* Nav */
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+      background: var(--nav-bg); border-bottom: 1px solid var(--hairline);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 96px; gap: 18px; }
+    .brandmark { display: inline-flex; align-items: center; height: 64px; }
+    .brandmark img { height: 64px; width: auto; }
+    .brandmark .logo-light { display: var(--logo-light); }
+    .brandmark .logo-dark { display: var(--logo-dark); }
+    .nav__links { display: flex; align-items: center; gap: 30px; }
+    .nav__links a { font-size: 0.92rem; color: var(--text-muted); transition: color 0.2s ease; position: relative; }
+    .nav__links a:hover { color: var(--text); }
+    .nav__links a[aria-current="page"] { color: var(--text); }
+    .nav__links-cta { display: none; }
+    .nav__right { display: flex; align-items: center; gap: 10px; }
+    .nav__burger {
+      display: none; width: 42px; height: 42px; flex: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      border: 1px solid var(--hairline-strong); border-radius: 999px; background: transparent; color: var(--text); cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .nav__burger span { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .nav__burger:hover { border-color: var(--azure); }
+    .nav__burger:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .nav.open .nav__burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav.open .nav__burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    .toggle {
+      display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px;
+      border: 1px solid var(--hairline-strong); border-radius: 999px; background: transparent; color: var(--text);
+      cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, transform 0.3s ease; flex: none;
+    }
+    .toggle:hover { border-color: var(--azure); color: var(--azure); transform: rotate(18deg); }
+    .toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .toggle svg { width: 18px; height: 18px; }
+    .toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .toggle .icon-moon { display: block; }
+
+    /* Page hero */
+    .phead { padding: clamp(56px, 7vw, 96px) 0 clamp(36px, 4vw, 56px); }
+    .crumb { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); display: flex; gap: 8px; align-items: center; }
+    .crumb a:hover { color: var(--azure); }
+    .phead .eyebrow { display: inline-flex; align-items: center; gap: 12px; margin-top: 26px; }
+    .phead .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--azure); opacity: 0.7; }
+    .phead__title { font-size: clamp(2.2rem, 5.6vw, 3.6rem); font-weight: 700; line-height: 1.04; letter-spacing: -0.035em; margin-top: 18px; max-width: 16ch; }
+    .phead__title .serif { font-weight: 400; }
+    .phead__sub { margin-top: 20px; font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--text-muted); max-width: 54ch; }
+
+    /* Flow / numbered timeline (a real sequence: order → dispatch → delivery) */
+    .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 8px; }
+    .flowstep {
+      position: relative; border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface);
+      padding: 26px 24px 28px; box-shadow: var(--shadow-sm);
+    }
+    .flowstep__no { font-family: 'IBM Plex Mono', monospace; font-size: 0.74rem; letter-spacing: 0.18em; color: var(--azure); }
+    .flowstep__icon { width: 42px; height: 42px; border-radius: 12px; background: rgba(46,139,224,0.12); border: 1px solid rgba(46,139,224,0.28); display: grid; place-items: center; color: var(--azure); margin-top: 16px; }
+    .flowstep__icon svg { width: 21px; height: 21px; }
+    .flowstep__name { font-size: 1.14rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 16px; }
+    .flowstep__time { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); margin-top: 6px; }
+    .flowstep__desc { font-size: 0.92rem; color: var(--text-muted); margin-top: 10px; }
+
+    /* Options table */
+    .opts { margin-top: 40px; border: 1px solid var(--hairline); border-radius: 18px; overflow: hidden; background: var(--surface); box-shadow: var(--shadow-sm); }
+    .optrow { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; padding: 20px 24px; border-top: 1px solid var(--hairline); align-items: baseline; }
+    .optrow:first-child { border-top: none; }
+    .optrow--head { background: var(--surface-2); }
+    .optrow--head span { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-faint); }
+    .optrow__name { font-weight: 600; letter-spacing: -0.01em; }
+    .optrow__name small { display: block; font-weight: 400; font-size: 0.85rem; color: var(--text-muted); margin-top: 3px; }
+    .optrow__val { color: var(--text-muted); font-size: 0.95rem; }
+    .optrow__val strong { color: var(--text); font-weight: 600; }
+
+    .note { margin-top: 28px; display: flex; gap: 14px; align-items: flex-start; padding: 22px 24px; border-radius: 16px; background: var(--surface-2); border: 1px solid var(--hairline); }
+    .note svg { width: 20px; height: 20px; color: var(--azure); flex: none; margin-top: 2px; }
+    .note p { font-size: 0.95rem; color: var(--text-muted); }
+    .note strong { color: var(--text); }
+
+    /* CTA */
+    .cta { padding: 96px 0; }
+    .cta__inner { position: relative; overflow: hidden; border-radius: 24px; text-align: center; padding: clamp(48px, 8vw, 80px) 28px; color: var(--cream); background: radial-gradient(110% 130% at 80% -10%, rgba(46,139,224,0.32), transparent 55%), linear-gradient(150deg, var(--ink-rise), var(--ink) 60%, var(--ink-2)); border: 1px solid rgba(255,255,255,0.06); }
+    .cta__inner::before { content: ""; position: absolute; inset: -50% -10%; background: linear-gradient(100deg, transparent 42%, rgba(127,180,224,0.16) 50%, transparent 58%); transform: translateX(-60%); animation: sweep 9s ease-in-out infinite; pointer-events: none; }
+    @keyframes sweep { 0%, 12% { transform: translateX(-65%); } 55%, 100% { transform: translateX(65%); } }
+    .cta__title { position: relative; font-size: clamp(1.9rem, 5vw, 3rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+    .cta__title .serif { font-weight: 400; }
+    .cta__sub { position: relative; margin: 18px auto 0; max-width: 46ch; color: rgba(243,239,231,0.72); }
+    .cta__actions { position: relative; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 32px; }
+    .cta .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
+    .cta .btn--ghost:hover { border-color: var(--cream); color: var(--cream); }
+
+    /* Footer */
+    .footer { background: var(--ink-2); color: var(--cream); border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer__top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; padding: 72px 0 56px; }
+    .footer__brand img { height: 46px; width: auto; }
+    .footer__tag { margin-top: 18px; color: rgba(243,239,231,0.62); max-width: 34ch; font-size: 0.96rem; }
+    .footer__socials { display: flex; gap: 10px; margin-top: 24px; }
+    .footer__socials a { width: 40px; height: 40px; border-radius: 999px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.16); color: var(--cream); transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease; }
+    .footer__socials a:hover { border-color: var(--azure); color: #fff; background: rgba(46,139,224,0.18); transform: translateY(-2px); }
+    .footer__socials svg { width: 18px; height: 18px; }
+    .footer__col h4 { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--azure-soft); margin-bottom: 16px; font-weight: 500; }
+    .footer__col a { display: block; padding: 7px 0; color: rgba(243,239,231,0.66); font-size: 0.95rem; transition: color 0.2s ease; }
+    .footer__col a:hover { color: var(--cream); }
+    .footer__col a[aria-current="page"] { color: var(--cream); }
+    .footer__bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; padding: 24px 0 40px; border-top: 1px solid rgba(255,255,255,0.08); color: rgba(243,239,231,0.5); font-size: 0.86rem; }
+    .footer__bottom a { color: rgba(243,239,231,0.66); transition: color 0.2s ease; }
+    .footer__bottom a:hover { color: var(--cream); }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    @media (max-width: 900px) {
+      .flow { grid-template-columns: 1fr; }
+      .footer__top { grid-template-columns: repeat(3, 1fr); }
+      .footer__brand { grid-column: 1 / -1; }
+    }
+    @media (max-width: 860px) {
+      .nav__inner { height: 76px; }
+      .brandmark, .brandmark img { height: 50px; }
+      .nav__cta { display: none; }
+      .nav__burger { display: inline-flex; }
+      .nav__links {
+        position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--nav-bg); backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+        border-bottom: 1px solid var(--hairline); padding: 8px 28px 20px;
+        transform: translateY(-12px); opacity: 0; pointer-events: none; transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+      .nav.open .nav__links { transform: none; opacity: 1; pointer-events: auto; }
+      .nav__links a { font-size: 1rem; color: var(--text); padding: 15px 4px; border-bottom: 1px solid var(--hairline); }
+      .nav__links a:last-child { border-bottom: none; }
+      .nav__links-cta { display: inline-flex; color: #fff; margin-top: 14px; padding: 14px 22px; }
+    }
+    @media (max-width: 700px) {
+      .optrow { grid-template-columns: 1fr; gap: 4px; padding: 18px 20px; }
+      .optrow--head { display: none; }
+      .optrow__val::before { content: attr(data-label) " · "; font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 22px; }
+      .section { padding: 64px 0; }
+      .cta { padding: 64px 0; }
+      .nav__inner { height: 64px; }
+      .brandmark, .brandmark img { height: 40px; }
+      .nav__links { top: 64px; padding: 8px 22px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cta__inner::before { animation: none; opacity: 0.4; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { transition-duration: 0.001s !important; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="brandmark" href="index.html" aria-label="GP Autocare home">
+        <img class="logo-dark" src="brand_assets/gp-autocare-logo-dark.svg" alt="GP Autocare">
+        <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+      </a>
+      <div class="nav__links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#packages">Packages</a>
+        <a href="product.html">Shop</a>
+        <a href="featured-product.html">The Kit</a>
+        <a class="btn btn--primary nav__links-cta" href="index.html#contact">Book a detail</a>
+      </div>
+      <div class="nav__right">
+        <a class="btn btn--dark nav__cta" href="index.html#contact">Book a detail</a>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav__burger" id="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="phead">
+    <div class="wrap">
+      <nav class="crumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a><span aria-hidden="true">/</span><span>Shipping</span>
+      </nav>
+      <p class="eyebrow">Shipping</p>
+      <h1 class="phead__title">Packed with care, on its <span class="serif">way</span> fast.</h1>
+      <p class="phead__sub">The same attention we give the cars in the bay goes into every box we send out. Here's exactly how your products and kits get to your door.</p>
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <main>
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head reveal" style="max-width:760px;">
+          <p class="eyebrow">From cart to curbside</p>
+          <h2 class="section__title">Three steps, no <span class="serif">surprises</span></h2>
+          <p class="section__sub">Order before 2pm on a business day and it ships the same afternoon. You'll get a tracking link the moment it leaves the shop.</p>
+        </div>
+
+        <div class="flow" style="margin-top:48px;">
+          <article class="flowstep reveal">
+            <span class="flowstep__no">01</span>
+            <div class="flowstep__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <h3 class="flowstep__name">Order placed</h3>
+            <p class="flowstep__time">Instant confirmation</p>
+            <p class="flowstep__desc">You'll get an email receipt right away with your order summary and a link to track it once it ships.</p>
+          </article>
+          <article class="flowstep reveal">
+            <span class="flowstep__no">02</span>
+            <div class="flowstep__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="M3.27 6.96 12 12.01l8.73-5.05M12 22.08V12"/></svg></div>
+            <h3 class="flowstep__name">Packed &amp; dispatched</h3>
+            <p class="flowstep__time">Same or next business day</p>
+            <p class="flowstep__desc">Bottles are sealed, boxed and padded so nothing leaks or rattles in transit, then handed to the carrier.</p>
+          </article>
+          <article class="flowstep reveal">
+            <span class="flowstep__no">03</span>
+            <div class="flowstep__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 18H3V6a1 1 0 0 1 1-1h11v13h-3"/><path d="M15 8h4l3 3v7h-2"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="16.5" cy="18.5" r="1.5"/></svg></div>
+            <h3 class="flowstep__name">On your doorstep</h3>
+            <p class="flowstep__time">2–5 business days</p>
+            <p class="flowstep__desc">Standard delivery lands within the week. Track every leg of the trip from the link in your shipping email.</p>
+          </article>
+        </div>
+
+        <div class="opts reveal">
+          <div class="optrow optrow--head">
+            <span>Method</span><span>Cost</span><span>Estimated arrival</span>
+          </div>
+          <div class="optrow">
+            <div class="optrow__name">Standard<small>Tracked, signature optional</small></div>
+            <div class="optrow__val" data-label="Cost"><strong>Free over $75</strong> · otherwise $6</div>
+            <div class="optrow__val" data-label="Arrival">2–5 business days</div>
+          </div>
+          <div class="optrow">
+            <div class="optrow__name">Express<small>Priority, tracked &amp; signed</small></div>
+            <div class="optrow__val" data-label="Cost"><strong>$14</strong> flat</div>
+            <div class="optrow__val" data-label="Arrival">1–2 business days</div>
+          </div>
+          <div class="optrow">
+            <div class="optrow__name">Local pickup<small>Collect from the shop</small></div>
+            <div class="optrow__val" data-label="Cost"><strong>Free</strong></div>
+            <div class="optrow__val" data-label="Arrival">Ready in a few hours</div>
+          </div>
+        </div>
+
+        <div class="note reveal">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg>
+          <p><strong>Shipping within the continental US.</strong> We don't ship internationally just yet — but if you're nearby, choose local pickup at checkout and grab your kit straight from the bay. Questions about a specific address? <a href="index.html#contact" style="color:var(--azure);">Get in touch</a>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta__inner reveal">
+        <h2 class="cta__title">Ready when <span class="serif">you</span> are</h2>
+        <p class="cta__sub">Browse the range, grab the Ceramic Kit, or book the full treatment with us — it all starts back at home.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="index.html">Back to home
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="product.html">Shop the range</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" aria-label="GP Autocare home">
+            <img src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+          </a>
+          <p class="footer__tag">Professional auto detailing — and the pro-grade products behind it. Bringing back that new-car feeling, one car at a time.</p>
+          <div class="footer__socials">
+            <a href="https://instagram.com/gpautocare" target="_blank" rel="noopener" aria-label="GP Autocare on Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://facebook.com/gpautocare" target="_blank" rel="noopener" aria-label="GP Autocare on Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6.5v3H9v9h3v-9h2.5l.5-3H12V6.5a.5.5 0 0 1 .5-.5H15z"/></svg>
+            </a>
+            <a href="https://youtube.com/@gpautocare" target="_blank" rel="noopener" aria-label="GP Autocare on YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.5 5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="https://tiktok.com/@gpautocare" target="_blank" rel="noopener" aria-label="GP Autocare on TikTok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 6.5A4.5 4.5 0 0 0 18.5 11"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Shop</h4>
+          <a href="product.html">All products</a>
+          <a href="featured-product.html">GP Ceramic Kit</a>
+          <a href="index.html#packages">Detailing packages</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Company</h4>
+          <a href="index.html">Home</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#process">Process</a>
+          <a href="index.html#reviews">Reviews</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Support</h4>
+          <a href="index.html#contact">Contact</a>
+          <a href="shipping.html" aria-current="page">Shipping</a>
+          <a href="returns.html">Returns</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 GP Autocare. All rights reserved.</span>
+        <a href="index.html">← Back to home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle */
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    /* Mobile menu */
+    (function () {
+      var nav = document.querySelector('.nav');
+      var burger = document.getElementById('nav-burger');
+      if (!burger) return;
+      function setMenu(open) {
+        nav.classList.toggle('open', open);
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      }
+      burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+      nav.querySelectorAll('.nav__links a').forEach(function (a) { a.addEventListener('click', function () { setMenu(false); }); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+    })();
+
+    /* Scroll reveal */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

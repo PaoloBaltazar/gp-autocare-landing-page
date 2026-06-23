@@ -152,6 +152,7 @@
       transition: color 0.2s ease; position: relative;
     }
     .nav__links a:hover { color: var(--text); }
+    .nav__links a[aria-current="page"] { color: var(--text); }
     .nav__links-cta { display: none; }
     .nav__right { display: flex; align-items: center; gap: 10px; }
 
@@ -432,6 +433,43 @@
     .cta .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
     .cta .btn--ghost:hover { border-color: var(--cream); color: var(--cream); }
 
+    /* Booking form (lives on the dark contact panel) */
+    .book { position: relative; z-index: 1; max-width: 600px; margin: 36px auto 0; text-align: left; display: grid; gap: 16px; }
+    .book__row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: flex; flex-direction: column; gap: 7px; }
+    .field label { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure-soft); }
+    .field input, .field select, .field textarea {
+      font-family: inherit; font-size: 0.96rem; color: var(--cream);
+      background: rgba(10,14,19,0.42); border: 1px solid rgba(127,180,224,0.28);
+      border-radius: 12px; padding: 12px 14px; width: 100%;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .field textarea { resize: vertical; min-height: 92px; }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(243,239,231,0.4); }
+    .field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--azure); background: rgba(10,14,19,0.62); }
+    .field select {
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237FB4E0' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; background-size: 16px; padding-right: 40px;
+    }
+    .field select option { color: #10151C; }
+    .book__submit { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 16px; margin-top: 8px; }
+    .book__alt { font-size: 0.86rem; color: rgba(243,239,231,0.6); }
+    .book__alt a { color: var(--azure-soft); font-weight: 600; }
+    .book__alt a:hover { color: #fff; }
+    .book__ok {
+      position: relative; z-index: 1; max-width: 600px; margin: 36px auto 0;
+      display: none; gap: 14px; align-items: flex-start; text-align: left;
+      padding: 24px 26px; border-radius: 16px;
+      background: rgba(10,14,19,0.42); border: 1px solid rgba(127,180,224,0.34);
+    }
+    .book__ok.show { display: flex; }
+    .book__ok svg { width: 24px; height: 24px; color: var(--azure-soft); flex: none; margin-top: 2px; }
+    .book__ok h3 { font-size: 1.1rem; font-weight: 600; }
+    .book__ok p { font-size: 0.92rem; color: rgba(243,239,231,0.72); margin-top: 4px; }
+    .book__ok a { color: var(--azure-soft); font-weight: 600; }
+    @media (max-width: 560px) { .book__row { grid-template-columns: 1fr; } }
+
     .footer { background: var(--ink); color: var(--cream); padding: 72px 0 40px; }
     .footer__top { display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; }
     .footer__brand img { height: 74px; width: auto; }
@@ -510,11 +548,11 @@
         <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
       </a>
       <div class="nav__links" id="nav-links">
+        <a href="#top" aria-current="page">Home</a>
         <a href="#services">Services</a>
-        <a href="#process">Process</a>
         <a href="#packages">Packages</a>
-        <a href="#shop">Shop</a>
-        <a href="#results">Results</a>
+        <a href="product.html">Shop</a>
+        <a href="featured-product.html">The Kit</a>
         <a class="btn btn--primary nav__links-cta" href="#contact">Book a detail</a>
       </div>
       <div class="nav__right">
@@ -683,15 +721,15 @@
         <h2 class="section__title">Detailing tiers, no <span class="serif">guesswork</span></h2>
         <p class="section__sub">Pick the level of care your car needs today. Every package is hand-finished and quoted up front.</p>
         <div class="tabs" role="tablist" aria-label="Package categories">
-          <button class="tab" role="tab" aria-selected="true" data-tab="0">Maintenance</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="1">Restoration</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="2">Protection</button>
+          <button class="tab" role="tab" id="tab-0" aria-controls="panel-0" aria-selected="true" tabindex="0" data-tab="0">Maintenance</button>
+          <button class="tab" role="tab" id="tab-1" aria-controls="panel-1" aria-selected="false" tabindex="-1" data-tab="1">Restoration</button>
+          <button class="tab" role="tab" id="tab-2" aria-controls="panel-2" aria-selected="false" tabindex="-1" data-tab="2">Protection</button>
         </div>
       </div>
 
       <div class="panels">
         <!-- Maintenance -->
-        <div class="panel" data-panel="0" data-active="true">
+        <div class="panel" id="panel-0" role="tabpanel" aria-labelledby="tab-0" tabindex="0" data-panel="0" data-active="true">
           <article class="pcard reveal">
             <span class="pcard__badge">Express</span>
             <h3 class="pcard__name">The Refresh</h3>
@@ -731,7 +769,7 @@
         </div>
 
         <!-- Restoration -->
-        <div class="panel" data-panel="1">
+        <div class="panel" id="panel-1" role="tabpanel" aria-labelledby="tab-1" tabindex="0" data-panel="1">
           <article class="pcard reveal">
             <span class="pcard__badge">One stage</span>
             <h3 class="pcard__name">Gloss Enhancement</h3>
@@ -771,7 +809,7 @@
         </div>
 
         <!-- Protection -->
-        <div class="panel" data-panel="2">
+        <div class="panel" id="panel-2" role="tabpanel" aria-labelledby="tab-2" tabindex="0" data-panel="2">
           <article class="pcard reveal">
             <span class="pcard__badge">Entry coat</span>
             <h3 class="pcard__name">Ceramic One</h3>
@@ -1058,11 +1096,57 @@
       <div class="cta__inner reveal">
         <h2 class="cta__title">Ready to bring back<br>that <span class="serif">new-car feeling?</span></h2>
         <p class="cta__sub">Tell us about your car and what you're after. We'll send a clear, no-pressure quote within a day.</p>
-        <div class="cta__actions">
-          <a class="btn btn--primary" href="mailto:hello@gpautocare.com">Book a detail
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </a>
-          <a class="btn btn--ghost" href="tel:+10000000000">Call the shop</a>
+
+        <form class="book" id="booking-form" novalidate>
+          <div class="book__row">
+            <div class="field">
+              <label for="bk-name">Your name</label>
+              <input type="text" id="bk-name" name="name" autocomplete="name" placeholder="Jordan Rivera" required>
+            </div>
+            <div class="field">
+              <label for="bk-email">Email</label>
+              <input type="email" id="bk-email" name="email" autocomplete="email" placeholder="you@email.com" required>
+            </div>
+          </div>
+          <div class="book__row">
+            <div class="field">
+              <label for="bk-phone">Phone <span style="text-transform:none;letter-spacing:0;opacity:0.6;">(optional)</span></label>
+              <input type="tel" id="bk-phone" name="phone" autocomplete="tel" placeholder="(415) 555-0142">
+            </div>
+            <div class="field">
+              <label for="bk-service">What you're after</label>
+              <select id="bk-service" name="service">
+                <option value="Maintenance detail">Maintenance detail</option>
+                <option value="Paint correction">Paint correction</option>
+                <option value="Ceramic coating">Ceramic coating</option>
+                <option value="Interior revival">Interior revival</option>
+                <option value="Paint protection film">Paint protection film</option>
+                <option value="Not sure yet">Not sure yet — help me choose</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="bk-vehicle">Your car</label>
+            <input type="text" id="bk-vehicle" name="vehicle" placeholder="e.g. 2019 BMW M4, black">
+          </div>
+          <div class="field">
+            <label for="bk-message">Anything else?</label>
+            <textarea id="bk-message" name="message" placeholder="Tell us about the paint, any trouble spots, or when you'd like to come in."></textarea>
+          </div>
+          <div class="book__submit">
+            <button class="btn btn--primary" type="submit">Send booking request
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </button>
+            <span class="book__alt">Prefer to talk? <a href="tel:+14155550142">(415) 555-0142</a></span>
+          </div>
+        </form>
+
+        <div class="book__ok" id="booking-ok" role="status" aria-live="polite">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+          <div>
+            <h3>Your request is ready to send</h3>
+            <p>Your email app should have opened with the details filled in — just hit send and we'll reply with a quote within a day. If it didn't, email us at <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1092,7 +1176,7 @@
           <div class="footer__col">
             <h3>Contact</h3>
             <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
-            <a href="tel:+10000000000">(000) 000-0000</a>
+            <a href="tel:+14155550142">(415) 555-0142</a>
             <span>Mon–Sat · 8am–6pm</span>
           </div>
         </div>
@@ -1191,15 +1275,59 @@
         procMql.addEventListener('change', function (e) { setProcMode(e.matches); });
       }
 
-      /* Package tabs */
+      /* Package tabs — proper ARIA tablist with roving tabindex + arrow keys */
       var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
       var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
-      tabs.forEach(function (tab) {
-        tab.addEventListener('click', function () {
-          tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
-          panels.forEach(function (p) { p.setAttribute('data-active', p.dataset.panel === tab.dataset.tab ? 'true' : 'false'); });
+      function selectTab(tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.setAttribute('tabindex', on ? '0' : '-1');
+        });
+        panels.forEach(function (p) { p.setAttribute('data-active', p.dataset.panel === tab.dataset.tab ? 'true' : 'false'); });
+        if (focus) { tab.focus(); }
+      }
+      tabs.forEach(function (tab, i) {
+        tab.addEventListener('click', function () { selectTab(tab, false); });
+        tab.addEventListener('keydown', function (e) {
+          var next;
+          if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { next = tabs[(i + 1) % tabs.length]; }
+          else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { next = tabs[(i - 1 + tabs.length) % tabs.length]; }
+          else if (e.key === 'Home') { next = tabs[0]; }
+          else if (e.key === 'End') { next = tabs[tabs.length - 1]; }
+          else { return; }
+          e.preventDefault();
+          selectTab(next, true);
         });
       });
+
+      /* Booking form — composes a pre-filled quote email (no backend on this static site) */
+      (function () {
+        var form = document.getElementById('booking-form');
+        var ok = document.getElementById('booking-ok');
+        if (!form || !ok) { return; }
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          if (!form.checkValidity()) { form.reportValidity(); return; }
+          var f = form.elements;
+          var lines = [
+            'Name: ' + f.name.value,
+            'Email: ' + f.email.value,
+            'Phone: ' + (f.phone.value || '—'),
+            'Service: ' + f.service.value,
+            'Vehicle: ' + (f.vehicle.value || '—'),
+            '',
+            (f.message.value || '(no extra details)')
+          ];
+          var subject = 'Detail booking — ' + (f.name.value || 'new request');
+          var href = 'mailto:hello@gpautocare.com?subject=' + encodeURIComponent(subject) +
+                     '&body=' + encodeURIComponent(lines.join('\n'));
+          window.location.href = href;
+          form.style.display = 'none';
+          ok.classList.add('show');
+          ok.focus && ok.focus();
+        });
+      })();
 
       /* FAQ accordion */
       document.querySelectorAll('.faq__item').forEach(function (item) {

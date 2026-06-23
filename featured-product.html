@@ -362,6 +362,15 @@
     .buy__card .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
     .buy__card .btn--ghost:hover { border-color: var(--cream); color: var(--cream); }
     .buy__fine { font-size: 0.78rem; color: rgba(243,239,231,0.5); }
+    .buy__added {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.86rem; color: rgba(243,239,231,0.82); line-height: 1.5;
+    }
+    .buy__added svg { width: 17px; height: 17px; color: var(--azure-soft); flex: none; margin-top: 2px; }
+    .buy__added a { color: var(--azure-soft); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
+    .buy__added a:hover { color: #fff; }
+    .btn--added { background: rgba(46,139,224,0.18); color: var(--cream); box-shadow: none; cursor: default; }
+    .btn--added:hover { background: rgba(46,139,224,0.18); color: var(--cream); transform: none; }
 
     /* ---------- Footer ---------- */
     .footer { background: var(--ink); color: var(--cream); padding: 72px 0 40px; }
@@ -430,10 +439,11 @@
       </a>
       <div class="nav__links" id="nav-links">
         <a href="index.html">Home</a>
-        <a href="#unbox">Unboxing</a>
-        <a href="#kit">What's inside</a>
-        <a href="#benefits">Why it works</a>
-        <a class="btn btn--primary nav__links-cta" href="#buy">Buy the kit</a>
+        <a href="index.html#services">Services</a>
+        <a href="index.html#packages">Packages</a>
+        <a href="product.html">Shop</a>
+        <a href="#top" aria-current="page">The Kit</a>
+        <a class="btn btn--primary nav__links-cta" href="index.html#contact">Book a detail</a>
       </div>
       <div class="nav__right">
         <a class="btn btn--dark nav__cta" href="#buy">Buy the kit</a>
@@ -630,10 +640,12 @@
           <div class="buy__card">
             <span class="buy__note">Complete kit</span>
             <div class="buy__price">$149 <span>/ kit</span></div>
-            <a class="btn btn--primary" href="#" aria-label="Add the GP Ceramic Kit to your cart">Add to cart
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-            </a>
+            <button class="btn btn--primary" id="add-to-cart" type="button" data-name="GP Ceramic Kit" data-price="149" aria-label="Add the GP Ceramic Kit to your cart">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.5 3h2l2.2 12.4a2 2 0 0 0 2 1.6h8.6a2 2 0 0 0 2-1.6L21 7H6"/></svg>
+              <span class="add-label">Add to cart</span>
+            </button>
             <a class="btn btn--ghost" href="index.html#contact">Talk to a detailer</a>
+            <p class="buy__added" id="cart-msg" role="status" aria-live="polite" hidden></p>
             <p class="buy__fine">Free shipping · 30-day satisfaction guarantee</p>
           </div>
         </div>
@@ -666,7 +678,7 @@
           <div class="footer__col">
             <h3>Contact</h3>
             <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
-            <a href="tel:+10000000000">(000) 000-0000</a>
+            <a href="tel:+14155550142">(415) 555-0142</a>
             <span>Mon–Sat · 8am–6pm</span>
           </div>
         </div>
@@ -704,6 +716,40 @@
         });
         document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
       }
+
+      /* Add to cart — tracks the order in localStorage and opens an email checkout.
+         No backend on this static site, so "checkout" composes a real order email. */
+      (function () {
+        var btn = document.getElementById('add-to-cart');
+        var msg = document.getElementById('cart-msg');
+        if (!btn || !msg) { return; }
+        var name = btn.dataset.name, price = parseInt(btn.dataset.price, 10) || 0;
+
+        function readCart() {
+          try { return JSON.parse(localStorage.getItem('gp-cart') || '{}'); }
+          catch (e) { return {}; }
+        }
+        btn.addEventListener('click', function () {
+          var cart = readCart();
+          var qty = (cart[name] || 0) + 1;
+          cart[name] = qty;
+          try { localStorage.setItem('gp-cart', JSON.stringify(cart)); } catch (e) {}
+
+          btn.classList.add('btn--added');
+          btn.querySelector('.add-label').textContent = qty > 1 ? 'In cart (' + qty + ')' : 'Added to cart';
+
+          var subject = 'GP Ceramic Kit order';
+          var body = 'I\'d like to order:\n\n' + qty + ' × ' + name + ' — $' + (price * qty) +
+                     '\n\nName:\nShipping address:\n';
+          var mailto = 'mailto:hello@gpautocare.com?subject=' + encodeURIComponent(subject) +
+                       '&body=' + encodeURIComponent(body);
+          msg.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" ' +
+            'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>' +
+            '<span>' + qty + ' in your cart ($' + (price * qty) + '). ' +
+            '<a href="' + mailto + '">Complete your order &rarr;</a></span>';
+          msg.hidden = false;
+        });
+      })();
 
       /* Scroll reveal for the static sections */
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
