@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — GP Autocare</title>
+  <meta name="description" content="The same pro-grade detailing products GP Autocare trusts in the bay — soaps, sealants, ceramics and tools, now stocked for owners who want to keep that new-car feeling between visits.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+  <style>
+    :root {
+      /* Brand constants */
+      --ink: #10151C;
+      --ink-2: #0B0F14;
+      --ink-rise: #1B2531;
+      --azure: #2E8BE0;
+      --azure-soft: #7FB4E0;
+      --azure-deep: #1A5C99;
+      --cream: #F3EFE7;
+
+      /* Light theme (default) */
+      --bg: #F6F3EC;
+      --surface: #FFFFFF;
+      --surface-2: #FBF9F3;
+      --text: var(--ink);
+      --text-muted: rgba(16, 21, 28, 0.60);
+      --text-faint: rgba(16, 21, 28, 0.42);
+      --hairline: rgba(16, 21, 28, 0.10);
+      --hairline-strong: rgba(16, 21, 28, 0.18);
+      --eyebrow: var(--azure-deep);
+      --nav-bg: rgba(246, 243, 236, 0.80);
+      --shadow: 0 24px 60px -34px rgba(16, 21, 28, 0.34);
+      --shadow-sm: 0 10px 30px -20px rgba(16, 21, 28, 0.40);
+      --logo-light: none;
+      --logo-dark: block;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0A0E13;
+      --surface: #121922;
+      --surface-2: #0E141B;
+      --text: var(--cream);
+      --text-muted: rgba(243, 239, 231, 0.60);
+      --text-faint: rgba(243, 239, 231, 0.40);
+      --hairline: rgba(243, 239, 231, 0.12);
+      --hairline-strong: rgba(243, 239, 231, 0.20);
+      --eyebrow: var(--azure-soft);
+      --nav-bg: rgba(10, 14, 19, 0.74);
+      --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+      --shadow-sm: 0 12px 30px -22px rgba(0, 0, 0, 0.8);
+      --logo-light: block;
+      --logo-dark: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .wrap { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .serif {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--azure);
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--eyebrow);
+    }
+
+    .section { padding: 104px 0; }
+    .section__head { max-width: 720px; }
+    .section__title {
+      font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-top: 16px;
+    }
+    .section__title .serif { font-size: 1.04em; line-height: 1; }
+    .section__sub {
+      margin-top: 18px;
+      font-size: 1.06rem;
+      color: var(--text-muted);
+      max-width: 56ch;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px 22px; border-radius: 999px; white-space: nowrap;
+      font-family: inherit; font-weight: 600; font-size: 0.94rem;
+      cursor: pointer; border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .btn svg { width: 15px; height: 15px; }
+    .btn--dark { background: var(--ink); color: var(--cream); }
+    .btn--dark:hover { background: var(--azure); color: #fff; transform: translateY(-2px); }
+    html[data-theme="dark"] .btn--dark { background: var(--cream); color: var(--ink); }
+    html[data-theme="dark"] .btn--dark:hover { background: var(--azure); color: #fff; }
+    .btn--primary { background: var(--azure); color: #fff; box-shadow: 0 12px 28px -14px rgba(46,139,224,0.9); }
+    .btn--primary:hover { background: #2477c2; transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--text); border-color: var(--hairline-strong); }
+    .btn--ghost:hover { border-color: var(--azure); color: var(--azure); transform: translateY(-2px); }
+    /* Ghost tuned to sit on dark panels (video / CTA / footer) — always light */
+    .btn--on-dark { background: rgba(255,255,255,0.06); color: #fff; border-color: rgba(255,255,255,0.32); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
+    .btn--on-dark:hover { border-color: #fff; background: rgba(255,255,255,0.12); transform: translateY(-2px); }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: saturate(150%) blur(14px);
+      -webkit-backdrop-filter: saturate(150%) blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--hairline);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 96px; gap: 18px; }
+    .brandmark { display: inline-flex; align-items: center; height: 64px; }
+    .brandmark img { height: 64px; width: auto; }
+    .brandmark .logo-light { display: var(--logo-light); }
+    .brandmark .logo-dark { display: var(--logo-dark); }
+
+    .nav__links { display: flex; align-items: center; gap: 30px; }
+    .nav__links a {
+      font-size: 0.92rem; color: var(--text-muted);
+      transition: color 0.2s ease; position: relative;
+    }
+    .nav__links a:hover { color: var(--text); }
+    .nav__links-cta { display: none; }
+    .nav__right { display: flex; align-items: center; gap: 10px; }
+
+    .nav__burger {
+      display: none; width: 42px; height: 42px; flex: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      border: 1px solid var(--hairline-strong); border-radius: 999px;
+      background: transparent; color: var(--text); cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .nav__burger span { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .nav__burger:hover { border-color: var(--azure); }
+    .nav__burger:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .nav.open .nav__burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav.open .nav__burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid var(--hairline-strong);
+      border-radius: 999px; background: transparent; color: var(--text);
+      cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, transform 0.3s ease; flex: none;
+    }
+    .toggle:hover { border-color: var(--azure); color: var(--azure); transform: rotate(18deg); }
+    .toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .toggle svg { width: 18px; height: 18px; }
+    .toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .toggle .icon-moon { display: block; }
+
+    /* ---------- Video hero ---------- */
+    .hero {
+      position: relative;
+      min-height: 86vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      isolation: isolate;
+      --on: #ffffff;
+      --on-muted: rgba(255,255,255,0.80);
+    }
+    .hero__video {
+      position: absolute; inset: 0; z-index: -2;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      background: var(--ink-2);
+    }
+    .hero__scrim {
+      position: absolute; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(120% 120% at 82% -10%, rgba(46,139,224,0.28), transparent 52%),
+        linear-gradient(180deg, rgba(11,15,20,0.55) 0%, rgba(11,15,20,0.62) 45%, rgba(11,15,20,0.80) 100%);
+    }
+    .hero__inner { padding-block: 120px; max-width: 760px; }
+    .hero .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      color: var(--azure-soft);
+    }
+    .hero .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--azure); opacity: 0.85; }
+    .hero__title {
+      color: var(--on);
+      font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+      font-weight: 700; line-height: 1.04; letter-spacing: -0.04em;
+      margin-top: 22px; max-width: 17ch;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.35);
+    }
+    .hero__title .serif { font-weight: 400; letter-spacing: -0.01em; color: var(--azure-soft); }
+    .hero__sub {
+      color: var(--on-muted);
+      margin-top: 24px;
+      font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+      max-width: 54ch;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.4);
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+
+    /* ---------- Features (why these products) ---------- */
+    .features { background: var(--surface-2); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .feature-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .feature {
+      padding: 32px 28px; border-radius: 18px;
+      background: var(--surface); border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-sm);
+    }
+    .feature__no {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.78rem; letter-spacing: 0.2em; color: var(--azure);
+    }
+    .feature__media {
+      margin: -32px -28px 22px;
+      aspect-ratio: 4 / 3; overflow: hidden;
+      border-radius: 17px 17px 0 0;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .feature__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .feature:hover .feature__media img { transform: scale(1.03); }
+    .feature h3 { font-size: 1.22rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 14px; }
+    .feature p { margin-top: 10px; color: var(--text-muted); font-size: 0.98rem; }
+
+    /* ---------- The range (category cards / nav anchors) ---------- */
+    .range-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
+      margin-top: 56px;
+    }
+    .range {
+      position: relative; padding: 34px 32px; border-radius: 20px;
+      background: var(--surface); border: 1px solid var(--hairline);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      scroll-margin-top: 120px;
+    }
+    .range:hover { transform: translateY(-4px); box-shadow: var(--shadow); border-color: var(--hairline-strong); }
+    .range__media {
+      margin: -34px -32px 24px;
+      aspect-ratio: 16 / 10; overflow: hidden;
+      border-radius: 19px 19px 0 0;
+      background: var(--ink-2);
+      border-bottom: 1px solid var(--hairline);
+    }
+    .range__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .range:hover .range__media img { transform: scale(1.03); }
+    .range__head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }
+    .range h3 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; }
+    .range__no { font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 0.8rem; letter-spacing: 0.18em; color: var(--text-faint); }
+    .range p { margin-top: 12px; color: var(--text-muted); max-width: 46ch; }
+    .range__items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .range__items span {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.74rem; letter-spacing: 0.04em;
+      padding: 6px 12px; border-radius: 999px;
+      background: var(--surface-2); border: 1px solid var(--hairline);
+      color: var(--text-muted);
+    }
+
+    /* ---------- Video callout ---------- */
+    .callout { background: var(--surface-2); border-top: 1px solid var(--hairline); }
+    .callout__grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+    .callout__media {
+      position: relative; border-radius: 22px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: var(--shadow);
+      background: var(--ink-2);
+      aspect-ratio: 16 / 11;
+    }
+    .callout__media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .callout__media::after {
+      content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 120% at 85% 0%, rgba(46,139,224,0.22), transparent 55%);
+    }
+    .callout__list { list-style: none; margin-top: 28px; display: grid; gap: 22px; }
+    .callout__list li { position: relative; padding-left: 38px; }
+    .callout__list li::before {
+      content: ""; position: absolute; left: 0; top: 4px;
+      width: 22px; height: 22px; border-radius: 999px;
+      background: rgba(46,139,224,0.14); border: 1px solid var(--azure);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232E8BE0' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: center; background-size: 12px;
+    }
+    .callout__list h4 { font-size: 1.06rem; font-weight: 600; }
+    .callout__list p { color: var(--text-muted); font-size: 0.96rem; margin-top: 4px; }
+
+    /* ---------- CTA band ---------- */
+    .cta { padding: 104px 0; }
+    .cta__panel {
+      position: relative; overflow: hidden;
+      border-radius: 26px; padding: clamp(40px, 6vw, 76px);
+      text-align: center;
+      background:
+        radial-gradient(120% 150% at 82% -20%, rgba(46,139,224,0.34), transparent 55%),
+        linear-gradient(150deg, var(--ink-rise), var(--ink) 58%, var(--ink-2));
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: var(--shadow);
+    }
+    .cta__panel .eyebrow { color: var(--azure-soft); }
+    .cta__panel h2 {
+      color: #fff; font-size: clamp(1.9rem, 4.8vw, 3rem);
+      font-weight: 700; line-height: 1.08; letter-spacing: -0.03em; margin-top: 16px;
+    }
+    .cta__panel h2 .serif { color: var(--azure-soft); }
+    .cta__panel p { color: rgba(255,255,255,0.74); max-width: 52ch; margin: 18px auto 0; }
+    .cta__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 34px; }
+
+    /* ---------- Footer ---------- */
+    .footer { background: var(--ink-2); color: var(--cream); border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer__top { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 40px; padding: 72px 0 56px; }
+    .footer__brand img { height: 46px; width: auto; }
+    .footer__tag { margin-top: 18px; color: rgba(243,239,231,0.62); max-width: 34ch; font-size: 0.96rem; }
+    .footer__socials { display: flex; gap: 10px; margin-top: 24px; }
+    .footer__socials a {
+      width: 40px; height: 40px; border-radius: 999px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.16); color: var(--cream);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+    .footer__socials a:hover { border-color: var(--azure); color: #fff; background: rgba(46,139,224,0.18); transform: translateY(-2px); }
+    .footer__socials svg { width: 18px; height: 18px; }
+    .footer__col h4 {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--azure-soft); margin-bottom: 16px; font-weight: 500;
+    }
+    .footer__col a { display: block; padding: 7px 0; color: rgba(243,239,231,0.66); font-size: 0.95rem; transition: color 0.2s ease; }
+    .footer__col a:hover { color: var(--cream); }
+    .footer__bottom {
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;
+      padding: 24px 0 40px; border-top: 1px solid rgba(255,255,255,0.08);
+      color: rgba(243,239,231,0.5); font-size: 0.86rem;
+    }
+    .footer__bottom a { color: rgba(243,239,231,0.66); transition: color 0.2s ease; }
+    .footer__bottom a:hover { color: var(--cream); }
+
+    /* ---------- Scroll reveal ---------- */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+
+    /* Tablet & below: stack the multi-column grids */
+    @media (max-width: 900px) {
+      .feature-grid { grid-template-columns: 1fr; gap: 18px; }
+      .range-grid { grid-template-columns: 1fr; gap: 18px; }
+      .callout__grid { grid-template-columns: 1fr; gap: 32px; }
+      .callout__media { aspect-ratio: 16 / 10; }
+      .footer__top { grid-template-columns: repeat(3, 1fr); }
+      .footer__brand { grid-column: 1 / -1; }
+    }
+
+    /* Tablet portrait & small laptop: hamburger nav before links crowd the logo */
+    @media (max-width: 860px) {
+      .nav__inner { height: 76px; }
+      .brandmark, .brandmark img { height: 50px; }
+      .nav__cta { display: none; }
+      .nav__burger { display: inline-flex; }
+      .nav__links {
+        position: absolute; top: 76px; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--nav-bg);
+        backdrop-filter: saturate(150%) blur(14px); -webkit-backdrop-filter: saturate(150%) blur(14px);
+        border-bottom: 1px solid var(--hairline);
+        padding: 8px 28px 20px;
+        transform: translateY(-12px); opacity: 0; pointer-events: none;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+      }
+      .nav.open .nav__links { transform: none; opacity: 1; pointer-events: auto; }
+      .nav__links a { font-size: 1rem; color: var(--text); padding: 15px 4px; border-bottom: 1px solid var(--hairline); }
+      .nav__links a:last-child { border-bottom: none; }
+      .nav__links-cta { display: inline-flex; color: #fff; margin-top: 14px; padding: 14px 22px; }
+    }
+
+    /* Tablet & phone: tighten the vertical rhythm */
+    @media (max-width: 760px) {
+      .section { padding: 72px 0; }
+      .cta { padding: 72px 0; }
+      .hero { min-height: 74vh; }
+      .hero__inner { padding-block: 96px; }
+      .feature { padding: 28px 24px; }
+      .range { padding: 28px 24px; }
+      .feature__media { margin: -28px -24px 20px; }
+      .range__media { margin: -28px -24px 22px; }
+      .feature-grid, .range-grid { margin-top: 40px; }
+      .callout__list { margin-top: 22px; }
+    }
+
+    /* Phones */
+    @media (max-width: 560px) {
+      .wrap { padding: 0 26px; }
+      .nav__inner { height: 64px; }
+      .brandmark, .brandmark img { height: 40px; }
+      .nav__links { top: 64px; padding: 8px 26px 20px; }
+      .section { padding: 56px 0; }
+      .cta { padding: 56px 0; }
+      .hero { min-height: 68vh; }
+      .hero__inner { padding-block: 80px; }
+      .hero__title { margin-top: 18px; }
+      .hero__sub { margin-top: 18px; }
+      .section__title { margin-top: 14px; }
+      .section__sub { margin-top: 14px; font-size: 1rem; }
+      .feature-grid, .range-grid { margin-top: 32px; }
+      .range__items { gap: 7px; }
+      /* let CTAs share the row and stretch evenly on small screens */
+      .hero__actions .btn, .cta__actions .btn { flex: 1 1 auto; }
+      .cta__panel { padding: 36px 22px; border-radius: 20px; }
+      .cta__actions { margin-top: 28px; }
+      .footer__top { grid-template-columns: 1fr 1fr; gap: 30px 24px; padding: 56px 0 44px; }
+      .footer__bottom { padding: 22px 0 36px; }
+    }
+
+    /* Small phones: single-column footer, full-width stacked CTAs */
+    @media (max-width: 400px) {
+      .footer__top { grid-template-columns: 1fr; gap: 32px; }
+      .hero__actions, .cta__actions { width: 100%; }
+      .hero__actions .btn, .cta__actions .btn { flex: 1 1 100%; }
+      .footer__bottom { justify-content: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .toggle, .range, .reveal, .footer__socials a, .nav__links,
+      .feature__media img, .range__media img { transition: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="brandmark" href="index.html" aria-label="GP Autocare home">
+        <img class="logo-dark" src="brand_assets/gp-autocare-logo-dark.svg" alt="GP Autocare">
+        <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+      </a>
+      <div class="nav__links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#wash">Wash &amp; Decon</a>
+        <a href="#protect">Protect</a>
+        <a href="#interior">Interior</a>
+        <a href="#tools">Tools</a>
+        <a class="btn btn--primary nav__links-cta" href="#shop">Shop all</a>
+      </div>
+      <div class="nav__right">
+        <a class="btn btn--dark nav__cta" href="#shop">Shop all</a>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav__burger" id="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <video class="hero__video" id="hero-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+      <source src="hero-video.mp4" type="video/mp4">
+    </video>
+    <div class="hero__scrim"></div>
+
+    <div class="wrap hero__inner">
+      <p class="eyebrow">The GP Autocare Shop</p>
+      <h1 class="hero__title">The products behind the <span class="serif">finish</span></h1>
+      <p class="hero__sub">The same pro-grade soaps, sealants, ceramics and tools we reach for in the bay — now stocked for owners who'd rather keep that new-car feeling than wait for it to fade.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#shop">Shop all products
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--on-dark" href="#wash">Browse by category</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features: why these products -->
+  <section class="section features" id="why">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">Why GP products</p>
+        <h2 class="section__title">Shelf-tested, then <span class="serif">customer-tested</span></h2>
+        <p class="section__sub">We don't stock anything we wouldn't run on a car we're handing back. Every bottle earns its place in the bay before it earns one on your shelf.</p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature reveal">
+          <div class="feature__media">
+            <img src="assets/products/feature-pro-grade.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="A matte black professional detailing spray bottle lit against a dark studio background">
+          </div>
+          <span class="feature__no">01</span>
+          <h3>Pro-grade, not watered down</h3>
+          <p>The exact concentrations we use in the bay — bottled at full strength, never diluted for the retail shelf.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="feature__media">
+            <img src="assets/products/feature-safe.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="A patch of soft white wash foam resting on glossy dark car paint without marring the finish">
+          </div>
+          <span class="feature__no">02</span>
+          <h3>Safe by design</h3>
+          <p>pH-balanced washes and well-lubricated decon that lift grime and contamination without marring the paint.</p>
+        </article>
+
+        <article class="feature reveal">
+          <div class="feature__media">
+            <img src="assets/products/feature-proven.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="A gloved detailer's hand working a foam applicator across a glossy black car panel in the bay">
+          </div>
+          <span class="feature__no">03</span>
+          <h3>Proven in the bay</h3>
+          <p>Chosen the hard way — by detailers using them every day — so the results you get at home match the ones we deliver.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- The range -->
+  <section class="section" id="shop">
+    <div class="wrap">
+      <div class="section__head reveal">
+        <p class="eyebrow">The range</p>
+        <h2 class="section__title">Everything for a <span class="serif">proper</span> detail</h2>
+        <p class="section__sub">Four lines that cover the whole process — start to finish, paint to cabin. Pick a category, or build a kit from across the shelf.</p>
+      </div>
+
+      <div class="range-grid">
+        <article class="range reveal" id="wash">
+          <div class="range__media">
+            <img src="assets/products/range-wash.jpg" width="900" height="563" loading="lazy" decoding="async"
+                 alt="Thick white snow foam and suds covering a glossy dark car hood during the wash stage">
+          </div>
+          <div class="range__head">
+            <h3>Wash &amp; Decon</h3>
+            <span class="range__no">01</span>
+          </div>
+          <p>pH-neutral shampoo, snow foam, iron remover and clay — the safe way to start every detail.</p>
+          <div class="range__items"><span>Snow Foam</span><span>pH Shampoo</span><span>Iron Remover</span><span>Clay Mitt</span></div>
+        </article>
+
+        <article class="range reveal" id="protect">
+          <div class="range__media">
+            <img src="assets/products/range-protect.jpg" width="900" height="563" loading="lazy" decoding="async"
+                 alt="Water beading into tight round droplets on a freshly ceramic-coated glossy black panel">
+          </div>
+          <div class="range__head">
+            <h3>Protect</h3>
+            <span class="range__no">02</span>
+          </div>
+          <p>Ceramic coatings, sealants and waxes that lock in gloss and shrug off water, road film and UV.</p>
+          <div class="range__items"><span>Ceramic Coating</span><span>Spray Sealant</span><span>Carnauba Wax</span></div>
+        </article>
+
+        <article class="range reveal" id="interior">
+          <div class="range__media">
+            <img src="assets/products/range-interior.jpg" width="900" height="563" loading="lazy" decoding="async"
+                 alt="A clean black leather car seat and dashboard with a detailing brush and microfiber cloth">
+          </div>
+          <div class="range__head">
+            <h3>Interior</h3>
+            <span class="range__no">03</span>
+          </div>
+          <p>Cabin cleaners, leather care and glass that leave a finish you can feel — without the heavy fragrance.</p>
+          <div class="range__items"><span>All-Purpose Cleaner</span><span>Leather Cream</span><span>Glass Cleaner</span></div>
+        </article>
+
+        <article class="range reveal" id="tools">
+          <div class="range__media">
+            <img src="assets/products/range-tools.jpg" width="900" height="563" loading="lazy" decoding="async"
+                 alt="Folded plush microfiber towels, foam applicator pads and detailing brushes arranged on dark slate">
+          </div>
+          <div class="range__head">
+            <h3>Tools</h3>
+            <span class="range__no">04</span>
+          </div>
+          <p>Plush towels, foam applicators, brushes and pads chosen to match the products they work with.</p>
+          <div class="range__items"><span>Plush Towels</span><span>DA Pads</span><span>Detailing Brushes</span><span>Applicators</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video callout -->
+  <section class="section callout">
+    <div class="wrap">
+      <div class="callout__grid">
+        <div class="callout__media reveal">
+          <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+            <source src="hero-video.mp4" type="video/mp4">
+          </video>
+        </div>
+        <div class="reveal">
+          <p class="eyebrow">See it work</p>
+          <h2 class="section__title">The difference, frame by <span class="serif">frame</span></h2>
+          <ul class="callout__list">
+            <li>
+              <h4>Even, easy coverage</h4>
+              <p>Products that flash and level on their own — no streaking, no high spots, no fighting the clock.</p>
+            </li>
+            <li>
+              <h4>Deep, wet gloss</h4>
+              <p>The kind of reflection that only comes from paint that's been properly prepped and protected.</p>
+            </li>
+            <li>
+              <h4>Beading that lasts</h4>
+              <p>Hydrophobic protection that keeps water — and the dirt it carries — moving off the panel for months.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <div class="cta__panel reveal">
+        <p class="eyebrow">Bring the bay home</p>
+        <h2>Keep that <span class="serif">new-car</span> feeling between visits</h2>
+        <p>Stock your shelf with the products we trust on every car that leaves the shop — and book us when it's time for the full treatment.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="#shop">Shop all products
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--on-dark" href="index.html#contact">Book a detail</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a href="index.html" aria-label="GP Autocare home">
+            <img src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+          </a>
+          <p class="footer__tag">Professional auto detailing — and the pro-grade products behind it. Bringing back that new-car feeling, one car at a time.</p>
+          <div class="footer__socials">
+            <a href="#" aria-label="GP Autocare on Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="GP Autocare on Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 0 0 9 6.5V9H6.5v3H9v9h3v-9h2.5l.5-3H12V6.5a.5.5 0 0 1 .5-.5H15z"/></svg>
+            </a>
+            <a href="#" aria-label="GP Autocare on YouTube">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.5 5 2.5-5 2.5z" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="GP Autocare on TikTok">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 6.5A4.5 4.5 0 0 0 18.5 11"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Shop</h4>
+          <a href="#wash">Wash &amp; Decon</a>
+          <a href="#protect">Protect</a>
+          <a href="#interior">Interior</a>
+          <a href="#tools">Tools</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Company</h4>
+          <a href="index.html">Home</a>
+          <a href="index.html#services">Services</a>
+          <a href="index.html#process">Process</a>
+          <a href="index.html#results">Results</a>
+        </div>
+
+        <div class="footer__col">
+          <h4>Support</h4>
+          <a href="index.html#contact">Contact</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <span>© 2026 GP Autocare. All rights reserved.</span>
+        <a href="index.html">← Back to home</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* Theme toggle */
+    (function () {
+      var btn = document.getElementById('theme-toggle');
+      if (btn) btn.addEventListener('click', function () {
+        var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    })();
+
+    /* Mobile menu */
+    (function () {
+      var nav = document.querySelector('.nav');
+      var burger = document.getElementById('nav-burger');
+      if (!burger) return;
+      burger.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.querySelectorAll('.nav__links a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('open');
+          burger.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+
+    /* Reduced-motion: pause background videos for those who opt out */
+    (function () {
+      var mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+      if (!mq.matches) return;
+      document.querySelectorAll('video').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
+    })();
+
+    /* Scroll reveal */
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

@@ -4,3 +4,9 @@
 # Editor
 .vscode/
 .idea/
+.vercel
+
+# Environment
+.env
+.env.*
+!.env.example

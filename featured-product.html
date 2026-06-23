@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GP Ceramic Kit — GP Autocare</title>
+  <meta name="description" content="The GP Ceramic Kit puts professional-grade ceramic coating in your hands — a glass-hard, 5-year finish you can lay down in your own driveway. Watch it open, then make it yours.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+  <style>
+    :root {
+      /* Brand constants */
+      --ink: #10151C;
+      --ink-2: #0B0F14;
+      --ink-rise: #1B2531;
+      --azure: #2E8BE0;
+      --azure-soft: #7FB4E0;
+      --azure-deep: #1A5C99;
+      --cream: #F3EFE7;
+      /* the frame backdrop colour, sampled from the unboxing frames */
+      --frame-cream: #ECE5D8;
+
+      /* Light theme (default) */
+      --bg: #F6F3EC;
+      --surface: #FFFFFF;
+      --surface-2: #FBF9F3;
+      --text: var(--ink);
+      --text-muted: rgba(16, 21, 28, 0.60);
+      --text-faint: rgba(16, 21, 28, 0.42);
+      --hairline: rgba(16, 21, 28, 0.10);
+      --hairline-strong: rgba(16, 21, 28, 0.18);
+      --eyebrow: var(--azure-deep);
+      --nav-bg: rgba(246, 243, 236, 0.80);
+      --shadow: 0 24px 60px -34px rgba(16, 21, 28, 0.34);
+      --shadow-sm: 0 10px 30px -20px rgba(16, 21, 28, 0.40);
+      --logo-light: none;
+      --logo-dark: block;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0A0E13;
+      --surface: #121922;
+      --surface-2: #0E141B;
+      --text: var(--cream);
+      --text-muted: rgba(243, 239, 231, 0.60);
+      --text-faint: rgba(243, 239, 231, 0.40);
+      --hairline: rgba(243, 239, 231, 0.12);
+      --hairline-strong: rgba(243, 239, 231, 0.20);
+      --eyebrow: var(--azure-soft);
+      --nav-bg: rgba(10, 14, 19, 0.74);
+      --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+      --shadow-sm: 0 12px 30px -22px rgba(0, 0, 0, 0.8);
+      --logo-light: block;
+      --logo-dark: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    .wrap { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .serif {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--azure);
+    }
+
+    .eyebrow {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--eyebrow);
+    }
+
+    .section { padding: 104px 0; }
+    .section__head { max-width: 720px; }
+    .section__title {
+      font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-top: 16px;
+    }
+    .section__title .serif { font-size: 1.04em; line-height: 1; }
+    .section__sub {
+      margin-top: 18px;
+      font-size: 1.06rem;
+      color: var(--text-muted);
+      max-width: 56ch;
+    }
+
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px 22px; border-radius: 999px; white-space: nowrap;
+      font-family: inherit; font-weight: 600; font-size: 0.94rem;
+      cursor: pointer; border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .btn svg { width: 15px; height: 15px; }
+    .btn--dark { background: var(--ink); color: var(--cream); }
+    .btn--dark:hover { background: var(--azure); color: #fff; transform: translateY(-2px); }
+    html[data-theme="dark"] .btn--dark { background: var(--cream); color: var(--ink); }
+    html[data-theme="dark"] .btn--dark:hover { background: var(--azure); color: #fff; }
+    .btn--primary { background: var(--azure); color: #fff; box-shadow: 0 12px 28px -14px rgba(46,139,224,0.9); }
+    .btn--primary:hover { background: #2477c2; transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--text); border-color: var(--hairline-strong); }
+    .btn--ghost:hover { border-color: var(--azure); color: var(--azure); transform: translateY(-2px); }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: saturate(150%) blur(14px);
+      -webkit-backdrop-filter: saturate(150%) blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--hairline);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 96px; gap: 18px; }
+    .brandmark { display: inline-flex; align-items: center; height: 64px; }
+    .brandmark img { height: 64px; width: auto; }
+    .brandmark .logo-light { display: var(--logo-light); }
+    .brandmark .logo-dark { display: var(--logo-dark); }
+
+    .nav__links { display: flex; align-items: center; gap: 30px; }
+    .nav__links a { font-size: 0.92rem; color: var(--text-muted); transition: color 0.2s ease; position: relative; }
+    .nav__links a:hover { color: var(--text); }
+    .nav__links a[aria-current="page"] { color: var(--text); }
+    .nav__links-cta { display: none; }
+    .nav__right { display: flex; align-items: center; gap: 10px; }
+
+    .nav__burger {
+      display: none; width: 42px; height: 42px; flex: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      border: 1px solid var(--hairline-strong); border-radius: 999px;
+      background: transparent; color: var(--text); cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .nav__burger span { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .nav__burger:hover { border-color: var(--azure); }
+    .nav__burger:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .nav.open .nav__burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav.open .nav__burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid var(--hairline-strong);
+      border-radius: 999px; background: transparent; color: var(--text);
+      cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, transform 0.3s ease; flex: none;
+    }
+    .toggle:hover { border-color: var(--azure); color: var(--azure); transform: rotate(18deg); }
+    .toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .toggle svg { width: 18px; height: 18px; }
+    .toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .toggle .icon-moon { display: block; }
+
+    @keyframes sweep { 0%, 12% { transform: translateX(-65%); } 55%, 100% { transform: translateX(65%); } }
+
+    /* ---------- Product hero ---------- */
+    .phero { position: relative; overflow: hidden; padding: clamp(64px, 8vw, 112px) 0 clamp(48px, 6vw, 88px); }
+    .phero__grid { display: grid; grid-template-columns: 1.02fr 0.98fr; gap: clamp(34px, 5vw, 64px); align-items: center; }
+    .phero .eyebrow { display: inline-flex; align-items: center; gap: 12px; }
+    .phero .eyebrow::before { content: ""; width: 26px; height: 1px; background: var(--azure); opacity: 0.7; }
+    .phero__title {
+      font-size: clamp(2.3rem, 5.6vw, 4.2rem);
+      font-weight: 700; line-height: 1.03; letter-spacing: -0.04em;
+      margin-top: 22px; max-width: 13ch;
+    }
+    .phero__title .serif { font-weight: 400; letter-spacing: -0.01em; }
+    .phero__sub { margin-top: 22px; font-size: clamp(1.02rem, 1.5vw, 1.18rem); color: var(--text-muted); max-width: 48ch; }
+    .phero__specs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 26px; }
+    .spec-chip {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 7px 13px; border-radius: 999px;
+      border: 1px solid var(--hairline-strong); color: var(--text-muted);
+    }
+    .phero__actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+    .phero__visual {
+      position: relative; overflow: hidden; border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow);
+      aspect-ratio: 4 / 3;
+      background:
+        radial-gradient(120% 120% at 80% -10%, rgba(46,139,224,0.22), transparent 55%),
+        linear-gradient(150deg, var(--ink-rise), var(--ink-2));
+    }
+    .phero__visual img { width: 100%; height: 100%; object-fit: cover; }
+    .phero__visual::before {
+      content: ""; position: absolute; inset: -50% -10%; z-index: 1;
+      background: linear-gradient(100deg, transparent 42%, rgba(127,180,224,0.16) 50%, transparent 58%);
+      transform: translateX(-60%); animation: sweep 9s ease-in-out infinite; pointer-events: none;
+    }
+    .phero__price {
+      position: absolute; left: 18px; bottom: 18px; z-index: 2;
+      display: inline-flex; align-items: baseline; gap: 8px;
+      padding: 10px 16px; border-radius: 999px;
+      background: rgba(10,14,19,0.55); border: 1px solid rgba(127,180,224,0.3);
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      color: var(--cream); font-weight: 700; letter-spacing: -0.01em;
+    }
+    .phero__price small { font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--azure-soft); }
+
+    /* ---------- Signature: scroll-driven unboxing reveal ---------- */
+    .reveal-scroll { position: relative; background: var(--frame-cream); }
+    .reveal-track { position: relative; height: 360vh; }
+    .reveal-stage {
+      position: -webkit-sticky; position: sticky; top: 0;
+      min-height: 100vh; height: 100svh; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--frame-cream);
+    }
+    .reveal-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+    .reveal-fallback { display: none; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .reveal-scrim {
+      position: absolute; inset: 0; pointer-events: none; z-index: 1;
+      background: radial-gradient(135% 105% at 50% 44%, transparent 56%, rgba(18,14,8,0.18) 100%);
+    }
+    .reveal-progress {
+      position: absolute; left: 0; right: 0; bottom: 0; height: 2px; z-index: 3;
+      background: rgba(16,21,28,0.10); pointer-events: none;
+    }
+    .reveal-progress span {
+      display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left center;
+      background: var(--azure);
+    }
+
+    .reveal-copy { position: absolute; inset: 0; z-index: 2; }
+    .beat {
+      position: absolute; inset: 0; opacity: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 96px 24px 80px; pointer-events: none;
+      will-change: opacity;
+    }
+    .beat__inner {
+      max-width: 760px; padding: 54px clamp(28px, 6vw, 72px);
+      background: radial-gradient(ellipse 120% 116% at 50% 50%,
+        rgba(243,239,231,0.94) 0%, rgba(243,239,231,0.82) 42%, rgba(243,239,231,0) 76%);
+    }
+    .beat .eyebrow { color: var(--azure-deep); }
+    .beat__title {
+      font-size: clamp(2.1rem, 6.6vw, 4.4rem); font-weight: 700; line-height: 1.04;
+      letter-spacing: -0.035em; color: var(--ink); margin-top: 16px;
+    }
+    .beat__title .serif { font-weight: 400; letter-spacing: -0.01em; }
+    .beat__line {
+      font-size: clamp(1.9rem, 5.6vw, 3.4rem); font-weight: 600; line-height: 1.08;
+      letter-spacing: -0.03em; color: var(--ink); margin-top: 14px;
+    }
+    .beat__line .serif { font-weight: 400; }
+    .beat__sub { margin-top: 18px; font-size: clamp(1rem, 1.7vw, 1.16rem); color: rgba(16,21,28,0.66); max-width: 44ch; margin-left: auto; margin-right: auto; }
+    .beat__actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+
+    .reveal-cue { display: inline-flex; flex-direction: column; align-items: center; gap: 7px; margin-top: 30px; color: rgba(16,21,28,0.5); }
+    .reveal-cue span { font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase; }
+    .reveal-cue svg { width: 20px; height: 20px; animation: cueBob 1.8s ease-in-out infinite; }
+    @keyframes cueBob { 0%, 100% { transform: translateY(-3px); } 50% { transform: translateY(3px); } }
+
+    /* static fallback (reduced motion / no canvas) */
+    .reveal-scroll.is-static .reveal-track { height: auto; }
+    .reveal-scroll.is-static .reveal-stage { position: static; min-height: 0; height: auto; display: block; }
+    .reveal-scroll.is-static .reveal-canvas,
+    .reveal-scroll.is-static .reveal-progress,
+    .reveal-scroll.is-static .beat--intro,
+    .reveal-scroll.is-static .beat--mid { display: none; }
+    .reveal-scroll.is-static .reveal-fallback { display: block; position: static; width: 100%; height: auto; aspect-ratio: 320 / 183; }
+    .reveal-scroll.is-static .reveal-copy { position: static; }
+    .reveal-scroll.is-static .beat--outro { position: static; opacity: 1 !important; padding: 72px 24px; pointer-events: auto; }
+
+    /* ---------- What's in the kit ---------- */
+    .kit { }
+    .kit__grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(34px, 5vw, 60px); align-items: center; margin-top: 8px; }
+    .kit__media {
+      border-radius: 22px; overflow: hidden; border: 1px solid var(--hairline);
+      box-shadow: var(--shadow); background: var(--surface-2); aspect-ratio: 16 / 10;
+    }
+    .kit__media img { width: 100%; height: 100%; object-fit: cover; }
+    .kit__list { list-style: none; margin-top: 28px; }
+    .kititem { display: grid; grid-template-columns: 22px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--hairline); }
+    .kititem:first-child { border-top: none; padding-top: 4px; }
+    .kititem__icon { color: var(--azure); margin-top: 4px; }
+    .kititem__icon svg { width: 18px; height: 18px; }
+    .kititem__name { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .kititem__spec { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+    .kititem__desc { font-size: 0.92rem; color: var(--text-muted); margin-top: 5px; }
+
+    /* ---------- Benefits ---------- */
+    .benefits { background: var(--surface); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .benefits__head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .benefits__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 52px; }
+    .benefit {
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 18px; background: var(--bg); border: 1px solid var(--hairline);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .benefit:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--hairline-strong); }
+    .benefit__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink-2); border-bottom: 1px solid var(--hairline); }
+    .benefit__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .benefit:hover .benefit__media img { transform: scale(1.04); }
+    .benefit__body { padding: 24px 22px 26px; }
+    .benefit__tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure); }
+    .benefit__title { font-size: 1.18rem; font-weight: 600; letter-spacing: -0.01em; margin-top: 8px; }
+    .benefit__desc { font-size: 0.92rem; color: var(--text-muted); margin-top: 8px; }
+
+    /* ---------- Pricing / buy ---------- */
+    .buy__panel {
+      position: relative; overflow: hidden; border-radius: 24px; color: var(--cream);
+      background:
+        radial-gradient(120% 130% at 85% -10%, rgba(46,139,224,0.30), transparent 55%),
+        linear-gradient(150deg, var(--ink-rise), var(--ink) 60%, var(--ink-2));
+      border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow);
+    }
+    .buy__panel::before {
+      content: ""; position: absolute; inset: -50% -10%;
+      background: linear-gradient(100deg, transparent 42%, rgba(127,180,224,0.16) 50%, transparent 58%);
+      transform: translateX(-60%); animation: sweep 9s ease-in-out infinite; pointer-events: none;
+    }
+    .buy__grid {
+      position: relative; z-index: 1; display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: clamp(28px, 4vw, 52px); padding: clamp(34px, 5vw, 56px); align-items: center;
+    }
+    .buy__content .eyebrow { color: var(--azure-soft); }
+    .buy__title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; margin-top: 14px; }
+    .buy__title .serif { font-weight: 400; }
+    .buy__desc { margin-top: 16px; color: rgba(243,239,231,0.72); font-size: 1rem; max-width: 44ch; }
+    .buy__list { list-style: none; margin: 22px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 11px 18px; }
+    .buy__list li { display: flex; gap: 10px; font-size: 0.9rem; color: rgba(243,239,231,0.82); }
+    .buy__list svg { width: 16px; height: 16px; color: var(--azure-soft); flex: none; margin-top: 3px; }
+    .buy__card {
+      background: rgba(10,14,19,0.42); border: 1px solid rgba(127,180,224,0.22);
+      border-radius: 18px; padding: 30px 28px; display: flex; flex-direction: column; gap: 16px;
+    }
+    .buy__note { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure-soft); }
+    .buy__price { font-size: 2.6rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+    .buy__price span { font-size: 0.9rem; font-weight: 500; color: rgba(243,239,231,0.55); }
+    .buy__card .btn { justify-content: center; width: 100%; }
+    .buy__card .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
+    .buy__card .btn--ghost:hover { border-color: var(--cream); color: var(--cream); }
+    .buy__fine { font-size: 0.78rem; color: rgba(243,239,231,0.5); }
+
+    /* ---------- Footer ---------- */
+    .footer { background: var(--ink); color: var(--cream); padding: 72px 0 40px; }
+    .footer__top { display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; }
+    .footer__brand img { height: 74px; width: auto; }
+    .footer__brand p { font-size: 0.92rem; color: rgba(243,239,231,0.6); margin-top: 18px; max-width: 34ch; }
+    .footer__cols { display: flex; gap: 60px; flex-wrap: wrap; }
+    .footer__col h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(243,239,231,0.42); margin-bottom: 14px; }
+    .footer__col a, .footer__col span { display: block; color: rgba(243,239,231,0.82); font-size: 0.94rem; padding: 5px 0; transition: color 0.2s ease; }
+    .footer__col a:hover { color: var(--azure); }
+    .footer__base { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; margin-top: 56px; padding-top: 26px; border-top: 1px solid rgba(243,239,231,0.12); font-size: 0.8rem; color: rgba(243,239,231,0.5); }
+
+    /* ---------- Reveal-in animation ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .phero__grid { grid-template-columns: 1fr; gap: 36px; }
+      .phero__visual { order: -1; }
+      .kit__grid { grid-template-columns: 1fr; gap: 32px; }
+      .benefits__grid { grid-template-columns: 1fr; }
+      .buy__grid { grid-template-columns: 1fr; }
+
+      .nav__burger { display: inline-flex; }
+      .nav__cta { display: none; }
+      .nav__links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--surface); border-bottom: 1px solid var(--hairline);
+        box-shadow: var(--shadow); padding: 8px clamp(20px, 5vw, 28px) 20px;
+        transform: translateY(-12px); opacity: 0; pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .nav.open .nav__links { transform: none; opacity: 1; pointer-events: auto; }
+      .nav__links a { font-size: 1rem; color: var(--text); padding: 15px 4px; border-bottom: 1px solid var(--hairline); }
+      .nav__links a:last-child { border-bottom: none; }
+      .nav__links-cta { display: inline-flex; color: #fff; margin-top: 14px; padding: 14px 22px; }
+    }
+    @media (max-width: 560px) {
+      .wrap { padding: 0 20px; }
+      .section { padding: 76px 0; }
+      .nav__inner { height: 68px; }
+      .brandmark, .brandmark img { height: 42px; }
+      .beat { padding: 80px 18px 72px; }
+      .beat__inner { padding: 40px 22px; }
+      .buy__list { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .phero__visual::before, .buy__panel::before { animation: none; opacity: 0.4; }
+      .reveal-cue svg { animation: none; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { transition-duration: 0.001s !important; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="brandmark" href="index.html" aria-label="GP Autocare home">
+        <img class="logo-dark" src="brand_assets/gp-autocare-logo-dark.svg" alt="GP Autocare">
+        <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+      </a>
+      <div class="nav__links" id="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#unbox">Unboxing</a>
+        <a href="#kit">What's inside</a>
+        <a href="#benefits">Why it works</a>
+        <a class="btn btn--primary nav__links-cta" href="#buy">Buy the kit</a>
+      </div>
+      <div class="nav__right">
+        <a class="btn btn--dark nav__cta" href="#buy">Buy the kit</a>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav__burger" id="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Product hero -->
+  <header class="phero">
+    <div class="wrap">
+      <div class="phero__grid">
+        <div class="phero__copy">
+          <p class="eyebrow">GP Ceramic Kit</p>
+          <h1 class="phero__title">Showroom gloss, by your own <span class="serif">hand.</span></h1>
+          <p class="phero__sub">The same glass-hard ceramic protection we lay down in the bay — boxed for your driveway. One kit, one afternoon, years of gloss.</p>
+          <div class="phero__specs">
+            <span class="spec-chip">9H hardness</span>
+            <span class="spec-chip">5-year protection</span>
+            <span class="spec-chip">Hydrophobic</span>
+            <span class="spec-chip">Coating-safe</span>
+          </div>
+          <div class="phero__actions">
+            <a class="btn btn--primary" href="#buy">Buy the kit
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="#unbox">See what's inside</a>
+          </div>
+        </div>
+        <div class="phero__visual">
+          <img src="assets/products/kit-closed.png" alt="The GP Ceramic Kit box, closed — matte black with an azure pinstripe seam.">
+          <span class="phero__price"><small>From</small> $149</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Signature: scroll-driven unboxing reveal -->
+  <section class="reveal-scroll" id="unbox" aria-label="The GP Ceramic Kit, unboxed">
+    <div class="reveal-track">
+      <div class="reveal-stage">
+        <canvas class="reveal-canvas" id="kit-canvas" aria-hidden="true"></canvas>
+        <img class="reveal-fallback" id="kit-fallback" src="assets/frames/frame_061.jpg"
+             alt="The GP Ceramic Kit opened, revealing the ceramic coating bottle, applicator block and folded microfiber cloths arranged in front of the box.">
+        <div class="reveal-scrim" aria-hidden="true"></div>
+
+        <div class="reveal-copy">
+          <!-- Beat 1 — over the closed box -->
+          <div class="beat beat--intro" data-beat="0">
+            <div class="beat__inner">
+              <p class="eyebrow">The unboxing</p>
+              <h2 class="beat__title"><span class="serif">Sealed.</span></h2>
+              <p class="beat__sub">Aerospace-grade ceramic, boxed with the same care we bring to your car.</p>
+              <span class="reveal-cue">
+                <span>Scroll to open</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+              </span>
+            </div>
+          </div>
+          <!-- Beat 2 — as the lid lifts -->
+          <div class="beat beat--mid" data-beat="1">
+            <div class="beat__inner">
+              <p class="eyebrow">The reveal</p>
+              <h2 class="beat__line">It opens on its <span class="serif">own.</span></h2>
+            </div>
+          </div>
+          <!-- Beat 3 — over the final flat-lay (holds to the end) -->
+          <div class="beat beat--outro" data-beat="2">
+            <div class="beat__inner">
+              <p class="eyebrow">Everything in one box</p>
+              <h2 class="beat__title">Coating. Applicator.<br><span class="serif">Microfiber.</span></h2>
+              <p class="beat__sub">Three pieces, one finish — the gloss and protection of a pro coating, ready for your driveway.</p>
+              <div class="beat__actions">
+                <a class="btn btn--dark" href="#buy">Get the kit
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal-progress" aria-hidden="true"><span id="kit-prog"></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's in the kit -->
+  <section class="section kit" id="kit">
+    <div class="wrap">
+      <div class="section__head reveal" style="max-width:760px;">
+        <p class="eyebrow">What's in the box</p>
+        <h2 class="section__title">Everything you need, nothing you <span class="serif">don't.</span></h2>
+        <p class="section__sub">No fillers, no add-ons to upsell later. Just the pieces it takes to lay down a clean, durable coat at home.</p>
+      </div>
+      <div class="kit__grid">
+        <div class="kit__media reveal">
+          <img src="assets/products/kit-open.png" alt="The opened GP Ceramic Kit beside its box, showing the ceramic coating bottle, applicator block and folded microfiber towels.">
+        </div>
+        <ul class="kit__list reveal">
+          <li class="kititem">
+            <span class="kititem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <div class="kititem__name">GP Ceramic Coating <span class="kititem__spec">50 ml · 9H</span></div>
+              <p class="kititem__desc">Our flagship SiO₂ coating. One bottle protects a full vehicle for up to five years.</p>
+            </div>
+          </li>
+          <li class="kititem">
+            <span class="kititem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <div class="kititem__name">Applicator block &amp; pads <span class="kititem__spec">×4 suede</span></div>
+              <p class="kititem__desc">Lays the coating down in even, streak-free passes — sized for your hand, not a machine.</p>
+            </div>
+          </li>
+          <li class="kititem">
+            <span class="kititem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <div class="kititem__name">Edgeless microfiber towels <span class="kititem__spec">×2</span></div>
+              <p class="kititem__desc">Plush, lint-free cloths for leveling the coat and buffing to a clean, deep shine.</p>
+            </div>
+          </li>
+          <li class="kititem">
+            <span class="kititem__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></span>
+            <div>
+              <div class="kititem__name">Prep spray <span class="kititem__spec">120 ml</span></div>
+              <p class="kititem__desc">A pH-neutral surface cleaner so the coat bonds to truly clean paint — included, not extra.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="section benefits" id="benefits">
+    <div class="wrap">
+      <div class="benefits__head reveal">
+        <p class="eyebrow">Why it works</p>
+        <h2 class="section__title">Pro results, without the <span class="serif">booth.</span></h2>
+        <p class="section__sub">The kit was built from our bay process, distilled to the parts that matter for a driveway detail.</p>
+      </div>
+      <div class="benefits__grid">
+        <article class="benefit reveal">
+          <div class="benefit__media"><img src="assets/products/feature-pro-grade.jpg" alt="The GP ceramic coating bottle lit against a black background."></div>
+          <div class="benefit__body">
+            <span class="benefit__tag">Protection</span>
+            <h3 class="benefit__title">Glass-hard 9H finish</h3>
+            <p class="benefit__desc">The same ceramic chemistry we trust in the bay — UV, road grime and water bead off and rinse clean.</p>
+          </div>
+        </article>
+        <article class="benefit reveal">
+          <div class="benefit__media"><img src="assets/products/feature-proven.jpg" alt="A gloved hand applying ceramic coating to a glossy black car panel with an applicator pad."></div>
+          <div class="benefit__body">
+            <span class="benefit__tag">Application</span>
+            <h3 class="benefit__title">Goes on by hand</h3>
+            <p class="benefit__desc">No machines, no booth. Wipe it on, level it off, and let it cure overnight in your own garage.</p>
+          </div>
+        </article>
+        <article class="benefit reveal">
+          <div class="benefit__media"><img src="assets/products/feature-safe.jpg" alt="A patch of clean wash foam beading on dark car paint."></div>
+          <div class="benefit__body">
+            <span class="benefit__tag">Upkeep</span>
+            <h3 class="benefit__title">Stays slick for years</h3>
+            <p class="benefit__desc">Washes get easier and the gloss holds — most of the time a quick rinse is all it takes.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing / buy -->
+  <section class="section buy" id="buy">
+    <div class="wrap">
+      <div class="buy__panel reveal">
+        <div class="buy__grid">
+          <div class="buy__content">
+            <p class="eyebrow">Get the kit</p>
+            <h2 class="buy__title">Showroom gloss, <span class="serif">delivered.</span></h2>
+            <p class="buy__desc">One box, everything inside, free shipping. Coat your car this weekend and keep it glossy for years.</p>
+            <ul class="buy__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Ceramic coating (50 ml)</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>4 suede applicator pads</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Applicator block</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>2 microfiber towels</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Prep spray (120 ml)</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Step-by-step guide</li>
+            </ul>
+          </div>
+          <div class="buy__card">
+            <span class="buy__note">Complete kit</span>
+            <div class="buy__price">$149 <span>/ kit</span></div>
+            <a class="btn btn--primary" href="#" aria-label="Add the GP Ceramic Kit to your cart">Add to cart
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </a>
+            <a class="btn btn--ghost" href="index.html#contact">Talk to a detailer</a>
+            <p class="buy__fine">Free shipping · 30-day satisfaction guarantee</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+          <p>Professional auto detailing that brings back that new-car feeling — done right, by hand, every time.</p>
+        </div>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h3>The Kit</h3>
+            <a href="#unbox">Unboxing</a>
+            <a href="#kit">What's inside</a>
+            <a href="#benefits">Why it works</a>
+            <a href="#buy">Buy the kit</a>
+          </div>
+          <div class="footer__col">
+            <h3>Explore</h3>
+            <a href="index.html">Home</a>
+            <a href="index.html#packages">Packages</a>
+            <a href="#unbox">The reveal</a>
+          </div>
+          <div class="footer__col">
+            <h3>Contact</h3>
+            <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
+            <a href="tel:+10000000000">(000) 000-0000</a>
+            <span>Mon–Sat · 8am–6pm</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer__base">
+        <span>© 2026 GP Autocare. All rights reserved.</span>
+        <span>Bringing back that new-car feeling</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+
+      /* Theme toggle */
+      document.getElementById('theme-toggle').addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+
+      /* Mobile nav (hamburger) */
+      var nav = document.querySelector('.nav');
+      var burger = document.getElementById('nav-burger');
+      if (nav && burger) {
+        function setMenu(open) {
+          nav.classList.toggle('open', open);
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+        burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+        document.querySelectorAll('#nav-links a').forEach(function (a) {
+          a.addEventListener('click', function () { setMenu(false); });
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+      }
+
+      /* Scroll reveal for the static sections */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      }
+
+      /* ---------- Scroll-driven unboxing reveal (canvas scrubber) ---------- */
+      (function () {
+        var section = document.getElementById('unbox');
+        if (!section) { return; }
+        var track = section.querySelector('.reveal-track');
+        var stage = section.querySelector('.reveal-stage');
+        var canvas = document.getElementById('kit-canvas');
+        var progEl = document.getElementById('kit-prog');
+        var beats = Array.prototype.slice.call(section.querySelectorAll('.beat'));
+        var ctx = (canvas && canvas.getContext) ? canvas.getContext('2d') : null;
+
+        var TOTAL = 61;
+        function pad(n) { return ('00' + n).slice(-3); }
+
+        /* On phones, load every other frame to roughly halve decoded-image memory
+           so the animation stays smooth and never crashes a low-end device. */
+        var mobile = window.matchMedia('(max-width: 700px)').matches;
+        var step = mobile ? 2 : 1;
+        var indices = [];
+        for (var i = 1; i <= TOTAL; i += step) { indices.push(i); }
+        if (indices[indices.length - 1] !== TOTAL) { indices.push(TOTAL); }
+        var N = indices.length;
+
+        /* Fallback: no canvas or reduced motion -> static final frame + key message */
+        if (!ctx || reduce) {
+          section.classList.add('is-static');
+          return;
+        }
+
+        var FRAME_BG = '#ECE5D8';
+        var imgs = new Array(N);
+        var loaded = 0, current = -1;
+        var dpr = Math.min(window.devicePixelRatio || 1, mobile ? 1.5 : 2);
+
+        function drawCover(img) {
+          if (!img || !img.naturalWidth) { return false; }
+          var cw = canvas.width, ch = canvas.height;
+          var s = Math.max(cw / img.naturalWidth, ch / img.naturalHeight);
+          var dw = img.naturalWidth * s, dh = img.naturalHeight * s;
+          ctx.fillStyle = FRAME_BG;
+          ctx.fillRect(0, 0, cw, ch);
+          ctx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
+          return true;
+        }
+
+        function progress() {
+          var dist = track.offsetHeight - stage.offsetHeight;
+          if (dist <= 0) { return 0; }
+          var top = track.getBoundingClientRect().top;
+          var p = -top / dist;
+          return p < 0 ? 0 : (p > 1 ? 1 : p);
+        }
+
+        /* fade in over a..b, hold b..c, fade out c..d */
+        function band(p, a, b, c, d) {
+          if (p <= a || p >= d) { return 0; }
+          if (p < b) { return (p - a) / (b - a); }
+          if (p > c) { return 1 - (p - c) / (d - c); }
+          return 1;
+        }
+
+        function updateBeats(p) {
+          var o0 = band(p, 0.00, 0.02, 0.13, 0.22);   // intro, over the closed box
+          var o1 = band(p, 0.34, 0.42, 0.52, 0.62);   // mid, as the lid folds open
+          var o2 = band(p, 0.72, 0.84, 1.20, 1.30);   // outro, holds over the flat-lay
+          beats[0].style.opacity = o0;
+          beats[1].style.opacity = o1;
+          beats[2].style.opacity = o2;
+          beats[2].style.pointerEvents = o2 > 0.5 ? 'auto' : 'none';
+        }
+
+        var ticking = false;
+        function render() {
+          ticking = false;
+          var p = progress();
+          var idx = Math.round(p * (N - 1));
+          if (idx < 0) { idx = 0; } else if (idx > N - 1) { idx = N - 1; }
+          if (idx !== current) {
+            if (drawCover(imgs[idx])) { current = idx; }
+          }
+          updateBeats(p);
+          if (progEl) { progEl.style.transform = 'scaleX(' + p.toFixed(4) + ')'; }
+        }
+        function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(render); } }
+
+        function resize() {
+          var w = stage.clientWidth, h = stage.clientHeight;
+          canvas.width = Math.round(w * dpr);
+          canvas.height = Math.round(h * dpr);
+          canvas.style.width = w + 'px';
+          canvas.style.height = h + 'px';
+          current = -1;            // force redraw at new size
+          render();
+        }
+
+        /* Preload every frame in the set (≈1.7MB total). Re-render on each load so
+           the frame at the current scroll position appears as soon as it is ready. */
+        indices.forEach(function (fi, k) {
+          var im = new Image();
+          im.decoding = 'async';
+          im.onload = function () { loaded++; render(); };
+          im.src = 'assets/frames/frame_' + pad(fi) + '.jpg';
+          imgs[k] = im;
+        });
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        var rt;
+        window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(resize, 150); });
+        resize();
+      })();
+    })();
+  </script>
+</body>
+</html>

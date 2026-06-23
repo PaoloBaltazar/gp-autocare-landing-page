@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GP Autocare — Professional Auto Detailing</title>
-  <meta name="description" content="GP Autocare is an auto detailing shop that brings back that new-car feeling.">
+  <meta name="description" content="GP Autocare is a professional auto detailing shop that brings back that new-car feeling — meticulous interior, exterior, paint correction and ceramic protection.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
   <script>
     (function () {
       var stored = localStorage.getItem('theme');
@@ -17,40 +17,50 @@
   </script>
   <style>
     :root {
+      /* Brand constants */
       --ink: #10151C;
+      --ink-2: #0B0F14;
+      --ink-rise: #1B2531;
       --azure: #2E8BE0;
+      --azure-soft: #7FB4E0;
+      --azure-deep: #1A5C99;
       --cream: #F3EFE7;
 
       /* Light theme (default) */
-      --bg: var(--cream);
+      --bg: #F6F3EC;
+      --surface: #FFFFFF;
+      --surface-2: #FBF9F3;
       --text: var(--ink);
-      --text-muted: rgba(16,21,28,0.85);
-      --tagline: #1A5C99;
-      --badge-fill: var(--ink);
-      --badge-mono: var(--cream);
-      --footer-bg: var(--ink);
-      --footer-text: var(--cream);
-      --footer-tag: #7FB4E0;
-      --footer-copy: rgba(243,239,231,0.5);
-      --toggle-border: rgba(16,21,28,0.15);
+      --text-muted: rgba(16, 21, 28, 0.60);
+      --text-faint: rgba(16, 21, 28, 0.42);
+      --hairline: rgba(16, 21, 28, 0.10);
+      --hairline-strong: rgba(16, 21, 28, 0.18);
+      --eyebrow: var(--azure-deep);
+      --nav-bg: rgba(246, 243, 236, 0.80);
+      --shadow: 0 24px 60px -34px rgba(16, 21, 28, 0.34);
+      --shadow-sm: 0 10px 30px -20px rgba(16, 21, 28, 0.40);
+      --logo-light: none;   /* light wordmark hidden in light theme */
+      --logo-dark: block;
     }
 
     html[data-theme="dark"] {
-      --bg: var(--ink);
+      --bg: #0A0E13;
+      --surface: #121922;
+      --surface-2: #0E141B;
       --text: var(--cream);
-      --text-muted: rgba(243,239,231,0.82);
-      --tagline: #7FB4E0;
-      --badge-fill: var(--cream);
-      --badge-mono: var(--ink);
-      --footer-bg: #19212B;
-      --footer-text: var(--cream);
-      --footer-tag: #7FB4E0;
-      --footer-copy: rgba(243,239,231,0.5);
-      --toggle-border: rgba(243,239,231,0.2);
+      --text-muted: rgba(243, 239, 231, 0.60);
+      --text-faint: rgba(243, 239, 231, 0.40);
+      --hairline: rgba(243, 239, 231, 0.12);
+      --hairline-strong: rgba(243, 239, 231, 0.20);
+      --eyebrow: var(--azure-soft);
+      --nav-bg: rgba(10, 14, 19, 0.74);
+      --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+      --shadow-sm: 0 12px 30px -22px rgba(0, 0, 0, 0.8);
+      --logo-light: block;
+      --logo-dark: none;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     html { scroll-behavior: smooth; }
 
     body {
@@ -58,282 +68,1307 @@
       color: var(--text);
       background: var(--bg);
       line-height: 1.6;
+      overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
-      transition: background 0.3s ease, color 0.3s ease;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
-    .container {
-      width: 100%;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+    .wrap { width: 100%; max-width: 1140px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
 
-    /* Theme toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 100;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 44px;
-      height: 44px;
-      border: 1px solid var(--toggle-border);
-      border-radius: 50%;
-      background: var(--bg);
-      color: var(--text);
-      cursor: pointer;
-      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .theme-toggle:hover { transform: scale(1.08); border-color: var(--azure); color: var(--azure); }
-    .theme-toggle svg { width: 20px; height: 20px; }
-    .theme-toggle .icon-moon { display: none; }
-    html[data-theme="dark"] .theme-toggle .icon-sun { display: none; }
-    html[data-theme="dark"] .theme-toggle .icon-moon { display: block; }
-
-    /* Hero */
-    .hero {
-      text-align: center;
-      padding: 96px 0 88px;
-    }
-
-    .hero__logo {
-      display: block;
-      width: 132px;
-      height: 132px;
-      margin: 0 auto 28px;
-    }
-
-    .hero__name {
-      font-size: clamp(2rem, 6vw, 3.25rem);
-      font-weight: 700;
-      letter-spacing: -0.5px;
-    }
-
-    .hero__name span { color: var(--azure); }
-
-    .hero__tagline {
-      margin-top: 16px;
-      font-family: 'IBM Plex Mono', ui-monospace, monospace;
-      font-size: clamp(0.85rem, 2.2vw, 1.05rem);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--tagline);
-    }
-
-    .hero__cta {
-      display: inline-block;
-      margin-top: 36px;
-      padding: 14px 32px;
-      background: var(--azure);
-      color: var(--cream);
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .hero__cta:hover { background: #2477c2; transform: translateY(-2px); }
-
-    /* Divider */
-    .divider {
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(46,139,224,0.5), transparent);
-      border: none;
-      max-width: 920px;
-      margin: 0 auto;
-    }
-
-    /* About */
-    .about {
-      padding: 80px 0;
-    }
-
-    .about__label {
-      font-family: 'IBM Plex Mono', ui-monospace, monospace;
-      font-size: 0.78rem;
-      letter-spacing: 4px;
-      text-transform: uppercase;
+    /* Shared accent serif — used ONLY for italic accent words */
+    .serif {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      font-style: italic;
+      font-weight: 400;
       color: var(--azure);
-      margin-bottom: 16px;
     }
 
-    .about__heading {
-      font-size: clamp(1.5rem, 4vw, 2.1rem);
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: -0.3px;
-    }
-
-    .about__text {
-      font-size: 1.075rem;
-      max-width: 680px;
-      color: var(--text-muted);
-    }
-
-    .about__text + .about__text { margin-top: 18px; }
-
-    .about__cta {
-      display: inline-block;
-      margin-top: 32px;
-      padding: 14px 32px;
-      background: var(--azure);
-      color: var(--cream);
-      text-decoration: none;
-      font-weight: 600;
-      border-radius: 8px;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-
-    .about__cta:hover { background: #2477c2; transform: translateY(-2px); }
-
-    /* Footer */
-    .footer {
-      background: var(--footer-bg);
-      color: var(--footer-text);
-      padding: 56px 0;
-      transition: background 0.3s ease;
-    }
-
-    .footer__inner {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 32px;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer__brand {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-
-    .footer__brand span { color: var(--azure); }
-
-    .footer__tag {
+    .eyebrow {
       font-family: 'IBM Plex Mono', ui-monospace, monospace;
       font-size: 0.72rem;
-      letter-spacing: 2px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
-      color: var(--footer-tag);
-      margin-top: 6px;
+      color: var(--eyebrow);
     }
 
-    .footer__links {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      font-size: 0.95rem;
+    .section { padding: 104px 0; }
+    .section__head { max-width: 720px; }
+    .section__title {
+      font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.025em;
+      margin-top: 16px;
+    }
+    .section__title .serif { font-size: 1.04em; line-height: 1; }
+    .section__sub {
+      margin-top: 18px;
+      font-size: 1.06rem;
+      color: var(--text-muted);
+      max-width: 56ch;
     }
 
-    .footer__links a {
-      color: var(--footer-text);
-      text-decoration: none;
-      opacity: 0.85;
-      transition: opacity 0.2s ease, color 0.2s ease;
+    /* ---------- Buttons ---------- */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      padding: 13px 22px; border-radius: 999px; white-space: nowrap;
+      font-family: inherit; font-weight: 600; font-size: 0.94rem;
+      cursor: pointer; border: 1px solid transparent;
+      transition: transform 0.18s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .btn svg { width: 15px; height: 15px; }
+    .btn--dark { background: var(--ink); color: var(--cream); }
+    .btn--dark:hover { background: var(--azure); color: #fff; transform: translateY(-2px); }
+    html[data-theme="dark"] .btn--dark { background: var(--cream); color: var(--ink); }
+    html[data-theme="dark"] .btn--dark:hover { background: var(--azure); color: #fff; }
+    .btn--primary { background: var(--azure); color: #fff; box-shadow: 0 12px 28px -14px rgba(46,139,224,0.9); }
+    .btn--primary:hover { background: #2477c2; transform: translateY(-2px); }
+    .btn--ghost { background: transparent; color: var(--text); border-color: var(--hairline-strong); }
+    .btn--ghost:hover { border-color: var(--azure); color: var(--azure); transform: translateY(-2px); }
+
+    /* ---------- Nav ---------- */
+    .nav {
+      position: sticky; top: 0; z-index: 60;
+      backdrop-filter: saturate(150%) blur(14px);
+      -webkit-backdrop-filter: saturate(150%) blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--hairline);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .nav__inner { display: flex; align-items: center; justify-content: space-between; height: 96px; gap: 18px; }
+    .brandmark { display: inline-flex; align-items: center; height: 64px; }
+    .brandmark img { height: 64px; width: auto; }
+    .brandmark .logo-light { display: var(--logo-light); }
+    .brandmark .logo-dark { display: var(--logo-dark); }
+
+    .nav__links { display: flex; align-items: center; gap: 30px; }
+    .nav__links a {
+      font-size: 0.92rem; color: var(--text-muted);
+      transition: color 0.2s ease; position: relative;
+    }
+    .nav__links a:hover { color: var(--text); }
+    .nav__links-cta { display: none; }
+    .nav__right { display: flex; align-items: center; gap: 10px; }
+
+    /* Hamburger (mobile/tablet) */
+    .nav__burger {
+      display: none; width: 42px; height: 42px; flex: none;
+      flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+      border: 1px solid var(--hairline-strong); border-radius: 999px;
+      background: transparent; color: var(--text); cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+    .nav__burger span { display: block; width: 16px; height: 2px; background: currentColor; border-radius: 2px; transition: transform 0.25s ease, opacity 0.2s ease; }
+    .nav__burger:hover { border-color: var(--azure); }
+    .nav__burger:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .nav.open .nav__burger span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .nav.open .nav__burger span:nth-child(2) { opacity: 0; }
+    .nav.open .nav__burger span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    .toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid var(--hairline-strong);
+      border-radius: 999px; background: transparent; color: var(--text);
+      cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, transform 0.3s ease; flex: none;
+    }
+    .toggle:hover { border-color: var(--azure); color: var(--azure); transform: rotate(18deg); }
+    .toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .toggle svg { width: 18px; height: 18px; }
+    .toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .toggle .icon-moon { display: block; }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; overflow: hidden; padding: 96px 0 64px; text-align: center; }
+    .hero__inner { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; }
+    .hero__fx { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; transition: opacity 0.8s ease; }
+    .hero__fx.on { opacity: 1; }
+    .hero .eyebrow { display: inline-flex; align-items: center; gap: 12px; }
+    .hero .eyebrow::before, .hero .eyebrow::after { content: ""; width: 26px; height: 1px; background: var(--azure); opacity: 0.7; }
+    .hero__title {
+      font-size: clamp(2.4rem, 7vw, 5.1rem);
+      font-weight: 700; line-height: 1.02; letter-spacing: -0.04em;
+      margin-top: 24px; max-width: 16ch;
+    }
+    .hero__title .serif { font-weight: 400; letter-spacing: -0.01em; }
+    .hero__sub { margin-top: 26px; font-size: clamp(1.02rem, 1.6vw, 1.2rem); color: var(--text-muted); max-width: 50ch; }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 36px; }
+
+    /* Signature: the detailing band — light rakes across a glossy dark panel */
+    .gloss-band {
+      position: relative; overflow: hidden;
+      margin-top: 70px; width: 100%;
+      border-radius: 22px; background:
+        radial-gradient(120% 160% at 80% -20%, rgba(46,139,224,0.30), transparent 55%),
+        linear-gradient(150deg, var(--ink-rise), var(--ink) 58%, var(--ink-2));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: var(--shadow);
+      color: var(--cream);
+      padding: 40px clamp(24px, 5vw, 56px);
+    }
+    .gloss-band::before {
+      content: ""; position: absolute; inset: -50% -10%;
+      background: linear-gradient(100deg, transparent 40%, rgba(243,239,231,0.05) 47%, rgba(127,180,224,0.22) 50%, rgba(243,239,231,0.05) 53%, transparent 60%);
+      transform: translateX(-60%); animation: sweep 8s ease-in-out infinite; pointer-events: none;
+    }
+    @keyframes sweep { 0%, 12% { transform: translateX(-65%); } 55%, 100% { transform: translateX(65%); } }
+    .gloss-band__row {
+      position: relative; z-index: 1; display: grid;
+      grid-template-columns: repeat(4, 1fr); gap: 22px; text-align: left;
+    }
+    .gloss-stage { display: flex; flex-direction: column; gap: 8px; }
+    .gloss-stage__no {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.18em;
+      color: var(--azure-soft);
+    }
+    .gloss-stage__name { font-size: 1.18rem; font-weight: 600; letter-spacing: -0.01em; }
+    .gloss-stage__desc { font-size: 0.86rem; color: rgba(243,239,231,0.6); }
+    .gloss-stage + .gloss-stage { border-left: 1px solid rgba(243,239,231,0.12); padding-left: 22px; }
+
+    /* ---------- Services / who we serve cards ---------- */
+    .cards-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+    .cards-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 44px; }
+    .scard {
+      position: relative; overflow: hidden; border-radius: 18px;
+      background: radial-gradient(120% 140% at 85% 0%, rgba(46,139,224,0.18), transparent 50%), linear-gradient(160deg, var(--ink-rise), var(--ink) 70%);
+      color: var(--cream); padding: 24px 22px 26px; min-height: 270px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border: 1px solid rgba(255,255,255,0.05);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .scard:hover { transform: translateY(-5px); box-shadow: var(--shadow); }
+    .scard__icon { width: 42px; height: 42px; border-radius: 11px; background: rgba(46,139,224,0.16); border: 1px solid rgba(127,180,224,0.3); display: grid; place-items: center; color: var(--azure-soft); }
+    .scard__icon svg { width: 21px; height: 21px; }
+    .scard__title { font-size: 1.16rem; font-weight: 600; letter-spacing: -0.01em; margin-top: auto; }
+    .scard__desc { font-size: 0.86rem; color: rgba(243,239,231,0.62); margin-top: 8px; }
+    .scard__tag { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--azure-soft); }
+
+    /* ---------- Process ---------- */
+    .process { background: var(--surface); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .process__head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .process__grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; margin-top: 56px; align-items: center; }
+    .process__panel {
+      border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface-2);
+      padding: 30px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden;
+    }
+    .process__panel-label { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-faint); }
+    .process__panel-title { font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-top: 12px; }
+    .process__panel-body { font-size: 0.95rem; color: var(--text-muted); margin-top: 12px; }
+    .process__chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+    .chip { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--hairline-strong); color: var(--text-muted); }
+    .steps { list-style: none; display: flex; flex-direction: column; }
+    .step { display: grid; grid-template-columns: 56px 1fr; gap: 18px; padding: 20px 16px; border-top: 1px solid var(--hairline); cursor: pointer; border-radius: 12px; transition: background 0.3s ease; }
+    .step:first-child { border-top: none; }
+    .step__no { font-family: 'IBM Plex Mono', monospace; font-size: 0.82rem; color: var(--azure); padding-top: 3px; }
+    .step__name { font-size: 1.12rem; font-weight: 600; letter-spacing: -0.01em; }
+    .step__desc { font-size: 0.92rem; color: var(--text-muted); margin-top: 5px; }
+    .step[aria-selected="true"] .step__name { color: var(--azure); }
+    .step[aria-selected="true"] { background: rgba(46,139,224,0.07); }
+
+    /* Scroll-driven process: pin the section and scrub through steps */
+    .process__track { position: relative; }
+    @keyframes procSwap { from { opacity: 0.4; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .process__panel.swap { animation: procSwap 0.45s ease; }
+    @media (min-width: 961px) and (prefers-reduced-motion: no-preference) {
+      .process--scroll { padding: 0; }
+      .process--scroll .process__track { height: 400vh; }
+      .process--scroll .process__sticky { position: sticky; top: 0; min-height: 100vh; display: flex; align-items: center; }
     }
 
-    .footer__links a:hover { opacity: 1; color: var(--azure); }
-
-    .footer__copyright {
-      margin-top: 40px;
-      text-align: center;
-      font-size: 0.8rem;
-      color: var(--footer-copy);
+    /* ---------- Packages (tabs) ---------- */
+    .tabs { display: inline-flex; flex-wrap: wrap; gap: 6px; padding: 6px; border-radius: 999px; background: var(--surface); border: 1px solid var(--hairline); margin-top: 32px; }
+    .tab {
+      font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+      padding: 10px 20px; border-radius: 999px; border: none; background: transparent; color: var(--text-muted);
+      transition: background 0.2s ease, color 0.2s ease;
     }
+    .tab[aria-selected="true"] { background: var(--ink); color: var(--cream); }
+    html[data-theme="dark"] .tab[aria-selected="true"] { background: var(--cream); color: var(--ink); }
+    .tab:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .panels { margin-top: 40px; }
+    .panel { display: none; }
+    .panel[data-active="true"] { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; animation: fade 0.4s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .pcard { border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface); padding: 28px 26px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+    .pcard--feature { background: radial-gradient(130% 120% at 85% 0%, rgba(46,139,224,0.22), transparent 55%), linear-gradient(160deg, var(--ink-rise), var(--ink)); color: var(--cream); border-color: rgba(255,255,255,0.06); }
+    .pcard__badge { font-family: 'IBM Plex Mono', monospace; font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--azure); }
+    .pcard--feature .pcard__badge { color: var(--azure-soft); }
+    .pcard__name { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; margin-top: 14px; }
+    .pcard__price { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; margin-top: 10px; }
+    .pcard__price span { font-size: 0.9rem; font-weight: 500; color: var(--text-faint); }
+    .pcard--feature .pcard__price span { color: rgba(243,239,231,0.55); }
+    .pcard__list { list-style: none; margin: 20px 0 26px; display: flex; flex-direction: column; gap: 11px; }
+    .pcard__list li { display: flex; gap: 10px; font-size: 0.92rem; color: var(--text-muted); }
+    .pcard--feature .pcard__list li { color: rgba(243,239,231,0.78); }
+    .pcard__list svg { width: 16px; height: 16px; color: var(--azure); flex: none; margin-top: 3px; }
+    .pcard--feature .pcard__list svg { color: var(--azure-soft); }
+    .pcard .btn { margin-top: auto; justify-content: center; }
+    .pcard--feature .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
 
+    /* ---------- FAQ ---------- */
+    .faq { text-align: center; background: var(--surface); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .faq__head { display: flex; flex-direction: column; align-items: center; }
+    .faq__list { max-width: 760px; margin: 44px auto 0; text-align: left; }
+    .faq__item { border-top: 1px solid var(--hairline); }
+    .faq__item:last-child { border-bottom: 1px solid var(--hairline); }
+    .faq__q { width: 100%; background: none; border: none; cursor: pointer; font-family: inherit; color: var(--text); text-align: left; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 22px 4px; font-size: 1.06rem; font-weight: 600; letter-spacing: -0.01em; }
+    .faq__q:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; border-radius: 6px; }
+    .faq__icon { flex: none; width: 22px; height: 22px; position: relative; transition: transform 0.3s ease; }
+    .faq__icon::before, .faq__icon::after { content: ""; position: absolute; background: var(--azure); border-radius: 2px; }
+    .faq__icon::before { top: 10px; left: 2px; right: 2px; height: 2px; }
+    .faq__icon::after { left: 10px; top: 2px; bottom: 2px; width: 2px; transition: transform 0.3s ease; }
+    .faq__item[data-open="true"] .faq__icon::after { transform: scaleY(0); }
+    .faq__a { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq__a p { padding: 0 4px 22px; color: var(--text-muted); font-size: 0.98rem; max-width: 64ch; }
+
+    /* ---------- Featured product ---------- */
+    .product__panel {
+      position: relative; overflow: hidden; border-radius: 24px; color: var(--cream);
+      background:
+        radial-gradient(120% 130% at 85% -10%, rgba(46,139,224,0.30), transparent 55%),
+        linear-gradient(150deg, var(--ink-rise), var(--ink) 60%, var(--ink-2));
+      border: 1px solid rgba(255,255,255,0.06); box-shadow: var(--shadow);
+    }
+    .product__grid { display: grid; grid-template-columns: 0.82fr 1fr; align-items: stretch; }
+    .product__visual {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      padding: clamp(36px, 4vw, 52px); min-height: 340px;
+      border-right: 1px solid rgba(243,239,231,0.12);
+      background: radial-gradient(90% 70% at 50% 32%, rgba(46,139,224,0.20), transparent 62%);
+    }
+    .product__visual::before {
+      content: ""; position: absolute; inset: -50% -10%;
+      background: linear-gradient(100deg, transparent 42%, rgba(127,180,224,0.14) 50%, transparent 58%);
+      transform: translateX(-60%); animation: sweep 9s ease-in-out infinite; pointer-events: none;
+    }
+    .product__mark { width: 128px; height: 128px; position: relative; z-index: 1; }
+    .product__mark img { width: 100%; height: 100%; display: block; }
+    .product__kit { position: relative; z-index: 1; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--azure-soft); }
+    .product__spec { position: relative; z-index: 1; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream); background: rgba(16,21,28,0.5); border: 1px solid rgba(127,180,224,0.3); padding: 7px 14px; border-radius: 999px; }
+    .product__content { padding: clamp(34px, 4vw, 52px); }
+    .product__content .eyebrow { color: var(--azure-soft); }
+    .product__title { font-size: clamp(1.8rem, 3.6vw, 2.6rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.025em; margin-top: 14px; }
+    .product__title .serif { font-weight: 400; }
+    .product__desc { margin-top: 16px; color: rgba(243,239,231,0.72); font-size: 1rem; max-width: 46ch; }
+    .product__list { list-style: none; margin: 22px 0 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 11px 18px; }
+    .product__list li { display: flex; gap: 10px; font-size: 0.9rem; color: rgba(243,239,231,0.82); }
+    .product__list svg { width: 16px; height: 16px; color: var(--azure-soft); flex: none; margin-top: 3px; }
+    .product__buy { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+    .product__price { font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em; }
+    .product__price span { font-size: 0.85rem; font-weight: 500; color: rgba(243,239,231,0.55); }
+    .product__note { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--azure-soft); }
+
+    /* ---------- Shop the range (product preview) ---------- */
+    .shop { background: var(--surface); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .shop__head { display: flex; align-items: flex-end; justify-content: space-between; gap: 28px; flex-wrap: wrap; }
+    .shop__head .section__title { max-width: 15ch; }
+    .shop__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 48px; }
+    .shopcat {
+      display: flex; flex-direction: column; overflow: hidden;
+      border-radius: 18px; background: var(--bg); border: 1px solid var(--hairline);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .shopcat:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--hairline-strong); }
+    .shopcat:focus-visible { outline: 2px solid var(--azure); outline-offset: 3px; }
+    .shopcat__media { aspect-ratio: 4 / 3; overflow: hidden; background: var(--ink-2); border-bottom: 1px solid var(--hairline); }
+    .shopcat__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .shopcat:hover .shopcat__media img { transform: scale(1.04); }
+    .shopcat__body { padding: 20px 20px 22px; display: flex; flex-direction: column; flex: 1; }
+    .shopcat__no { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--text-faint); }
+    .shopcat__title { display: flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 1.16rem; font-weight: 600; letter-spacing: -0.01em; }
+    .shopcat__title svg { width: 16px; height: 16px; flex: none; color: var(--azure); opacity: 0; transform: translateX(-5px); transition: opacity 0.2s ease, transform 0.2s ease; }
+    .shopcat:hover .shopcat__title svg, .shopcat:focus-visible .shopcat__title svg { opacity: 1; transform: none; }
+    .shopcat__desc { margin-top: 8px; font-size: 0.9rem; color: var(--text-muted); }
+    .shopcat__count { margin-top: auto; padding-top: 16px; font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--azure); }
+
+    /* ---------- Results / bento ---------- */
+    .results { background: var(--surface); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+    .results__head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 150px; gap: 16px; margin-top: 52px; }
+    .stat { border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface-2); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+    .stat__num { font-size: clamp(1.8rem, 3.4vw, 2.7rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+    .stat__label { font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+    /* spotlight cards — dark in both themes, with raking gloss */
+    .stat--spot {
+      position: relative; overflow: hidden; color: var(--cream);
+      background: linear-gradient(160deg, var(--ink-rise), var(--ink-2));
+      border-color: rgba(255,255,255,0.06);
+    }
+    .stat--spot::before { content: ""; position: absolute; width: 240px; height: 240px; top: -120px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(127,180,224,0.5), transparent 65%); pointer-events: none; }
+    .stat--spot .stat__label { color: var(--azure-soft); }
+    .stat--wide { grid-column: span 2; }
+    .stat--tall { grid-row: span 2; justify-content: flex-end; }
+    .stat--tall .stat__num { font-size: clamp(1.7rem, 4vw, 3.2rem); }
+
+    /* ---------- Testimonials ---------- */
+    .reviews__head { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .reviews__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+    .review { border-radius: 18px; border: 1px solid var(--hairline); background: var(--surface); padding: 26px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column; }
+    .review--feature { grid-row: span 2; background: radial-gradient(130% 90% at 90% 0%, rgba(46,139,224,0.2), transparent 55%), linear-gradient(160deg, var(--ink-rise), var(--ink)); color: var(--cream); border-color: rgba(255,255,255,0.06); justify-content: space-between; }
+    .review__stars { color: var(--azure); letter-spacing: 3px; font-size: 0.9rem; }
+    .review--feature .review__stars { color: var(--azure-soft); }
+    .review__text { margin-top: 16px; font-size: 1rem; color: var(--text-muted); line-height: 1.6; }
+    .review--feature .review__text { color: var(--cream); font-size: 1.18rem; font-weight: 500; line-height: 1.5; letter-spacing: -0.01em; }
+    .review__who { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+    .avatar { width: 40px; height: 40px; border-radius: 999px; flex: none; display: grid; place-items: center; font-weight: 700; font-size: 0.86rem; color: #fff; background: linear-gradient(150deg, var(--azure), var(--azure-deep)); }
+    .review__name { font-weight: 600; font-size: 0.92rem; }
+    .review__car { font-family: 'IBM Plex Mono', monospace; font-size: 0.68rem; letter-spacing: 0.08em; color: var(--text-faint); }
+    .review--feature .review__car { color: var(--azure-soft); }
+
+    /* ---------- CTA + Footer ---------- */
+    .cta { padding: 104px 0; }
+    .cta__inner { position: relative; overflow: hidden; border-radius: 24px; text-align: center; padding: clamp(48px, 8vw, 88px) 28px; color: var(--cream); background: radial-gradient(110% 130% at 80% -10%, rgba(46,139,224,0.32), transparent 55%), linear-gradient(150deg, var(--ink-rise), var(--ink) 60%, var(--ink-2)); border: 1px solid rgba(255,255,255,0.06); }
+    .cta__inner::before { content: ""; position: absolute; inset: -50% -10%; background: linear-gradient(100deg, transparent 42%, rgba(127,180,224,0.16) 50%, transparent 58%); transform: translateX(-60%); animation: sweep 9s ease-in-out infinite; pointer-events: none; }
+    .cta__title { position: relative; font-size: clamp(1.9rem, 5vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; }
+    .cta__title .serif { font-weight: 400; }
+    .cta__sub { position: relative; margin: 18px auto 0; max-width: 46ch; color: rgba(243,239,231,0.72); }
+    .cta__actions { position: relative; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+    .cta .btn--ghost { color: var(--cream); border-color: rgba(243,239,231,0.3); }
+    .cta .btn--ghost:hover { border-color: var(--cream); color: var(--cream); }
+
+    .footer { background: var(--ink); color: var(--cream); padding: 72px 0 40px; }
+    .footer__top { display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; }
+    .footer__brand img { height: 74px; width: auto; }
+    .footer__brand p { font-size: 0.92rem; color: rgba(243,239,231,0.6); margin-top: 18px; max-width: 34ch; }
+    .footer__cols { display: flex; gap: 60px; flex-wrap: wrap; }
+    .footer__col h3 { font-family: 'IBM Plex Mono', monospace; font-size: 0.66rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(243,239,231,0.42); margin-bottom: 14px; }
+    .footer__col a, .footer__col span { display: block; color: rgba(243,239,231,0.82); font-size: 0.94rem; padding: 5px 0; transition: color 0.2s ease; }
+    .footer__col a:hover { color: var(--azure); }
+    .footer__base { display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; margin-top: 56px; padding-top: 26px; border-top: 1px solid rgba(243,239,231,0.12); font-size: 0.8rem; color: rgba(243,239,231,0.5); }
+
+    /* ---------- Reveal animation ---------- */
+    .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 960px) {
+      .cards-row { grid-template-columns: repeat(2, 1fr); }
+      .shop__grid { grid-template-columns: repeat(2, 1fr); }
+      .panel[data-active="true"], .reviews__grid { grid-template-columns: 1fr; }
+      .review--feature { grid-row: auto; }
+      .process__grid { grid-template-columns: 1fr; gap: 32px; }
+      .gloss-band__row { grid-template-columns: repeat(2, 1fr); gap: 26px; }
+      .gloss-stage:nth-child(odd) { border-left: none; padding-left: 0; }
+      .bento { grid-template-columns: repeat(2, 1fr); }
+      .stat--wide { grid-column: span 2; }
+      .product__grid { grid-template-columns: 1fr; }
+      .product__visual { border-right: none; border-bottom: 1px solid rgba(243,239,231,0.12); min-height: 260px; }
+
+      /* Nav collapses into a hamburger dropdown */
+      .nav__burger { display: inline-flex; }
+      .nav__cta { display: none; }
+      .nav__links {
+        position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--surface); border-bottom: 1px solid var(--hairline);
+        box-shadow: var(--shadow); padding: 8px clamp(20px, 5vw, 28px) 20px;
+        transform: translateY(-12px); opacity: 0; pointer-events: none;
+        transition: opacity 0.25s ease, transform 0.25s ease;
+      }
+      .nav.open .nav__links { transform: none; opacity: 1; pointer-events: auto; }
+      .nav__links a { font-size: 1rem; color: var(--text); padding: 15px 4px; border-bottom: 1px solid var(--hairline); }
+      .nav__links a:last-child { border-bottom: none; }
+      .nav__links-cta { display: inline-flex; color: #fff; margin-top: 14px; padding: 14px 22px; }
+    }
     @media (max-width: 560px) {
-      .hero { padding: 64px 0 56px; }
-      .about { padding: 56px 0; }
-      .footer__inner { flex-direction: column; align-items: flex-start; }
+      .wrap { padding: 0 20px; }
+      .section { padding: 76px 0; }
+      .nav__inner { height: 68px; }
+      .brandmark, .brandmark img { height: 42px; }
+      .cards-row { grid-template-columns: 1fr; }
+      .shop__grid { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: 1fr 1fr; grid-auto-rows: 128px; }
+      .stat { padding: 18px; }
+      .stat--tall { grid-row: auto; }
+      .tabs { display: grid; grid-template-columns: repeat(3, 1fr); width: 100%; gap: 4px; flex-wrap: nowrap; }
+      .tab { padding: 11px 6px; font-size: 0.82rem; text-align: center; }
+      .product__list { grid-template-columns: 1fr; }
+      .gloss-band__row { grid-template-columns: 1fr; }
+      .gloss-stage + .gloss-stage { border-left: none; padding-left: 0; border-top: 1px solid rgba(243,239,231,0.12); padding-top: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .gloss-band::before, .cta__inner::before { animation: none; opacity: 0.4; }
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      * { transition-duration: 0.001s !important; }
     }
   </style>
 </head>
-<body>
+<body id="top">
 
-  <!-- Theme toggle -->
-  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
-    <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <circle cx="12" cy="12" r="4"/>
-      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
-    </svg>
-    <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-    </svg>
-  </button>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="wrap nav__inner">
+      <a class="brandmark" href="#top" aria-label="GP Autocare home">
+        <img class="logo-dark" src="brand_assets/gp-autocare-logo-dark.svg" alt="GP Autocare">
+        <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+      </a>
+      <div class="nav__links" id="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#packages">Packages</a>
+        <a href="#shop">Shop</a>
+        <a href="#results">Results</a>
+        <a class="btn btn--primary nav__links-cta" href="#contact">Book a detail</a>
+      </div>
+      <div class="nav__right">
+        <a class="btn btn--dark nav__cta" href="#contact">Book a detail</a>
+        <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="nav__burger" id="nav-burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-links">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
 
   <!-- Hero -->
   <header class="hero">
-    <div class="container">
-      <svg class="hero__logo" viewBox="0 0 140 140" role="img" xmlns="http://www.w3.org/2000/svg" aria-label="GP Autocare logo">
-        <circle cx="70" cy="70" r="58" fill="var(--badge-fill)"/>
-        <circle cx="70" cy="70" r="50.5" fill="none" stroke="#2E8BE0" stroke-width="2.9"/>
-        <text x="70" y="70" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="47.6" letter-spacing="0.6" fill="var(--badge-mono)" text-anchor="middle" dominant-baseline="central">GP</text>
-        <path d="M 104.8 20.12 Q 104.8 35.2 119.88 35.2 Q 104.8 35.2 104.8 50.28 Q 104.8 35.2 89.72 35.2 Q 104.8 35.2 104.8 20.12 Z" fill="#2E8BE0"/>
-        <path d="M 35.2 91.46 Q 35.2 99 42.74 99 Q 35.2 99 35.2 106.54 Q 35.2 99 27.66 99 Q 35.2 99 35.2 91.46 Z" fill="#2E8BE0"/>
-      </svg>
-      <h1 class="hero__name">GP <span>Autocare</span></h1>
-      <p class="hero__tagline">Bringing back that new-car feeling</p>
-      <a class="hero__cta" href="#contact">Book a Detail</a>
+    <canvas class="hero__fx" id="hero-fx" aria-hidden="true"></canvas>
+    <div class="wrap hero__inner">
+      <p class="eyebrow">Professional Auto Detailing</p>
+      <h1 class="hero__title">Where detailing meets <span class="serif">devotion</span></h1>
+      <p class="hero__sub">Meticulous, hand-finished detailing for owners who'd rather do it right than settle for a quick wash — bringing back that new-car feeling, every time.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href="#contact">Book a detail
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="btn btn--ghost" href="#packages">View packages</a>
+      </div>
+
+      <div class="gloss-band reveal">
+        <div class="gloss-band__row">
+          <div class="gloss-stage">
+            <span class="gloss-stage__no">01 — Wash</span>
+            <span class="gloss-stage__name">Safe wash</span>
+            <span class="gloss-stage__desc">Touchless foam, contact-free rinse, zero swirls.</span>
+          </div>
+          <div class="gloss-stage">
+            <span class="gloss-stage__no">02 — Correct</span>
+            <span class="gloss-stage__name">Paint correction</span>
+            <span class="gloss-stage__desc">Machine polishing that removes years of marring.</span>
+          </div>
+          <div class="gloss-stage">
+            <span class="gloss-stage__no">03 — Protect</span>
+            <span class="gloss-stage__name">Ceramic coating</span>
+            <span class="gloss-stage__desc">A glass-hard layer that keeps the gloss locked in.</span>
+          </div>
+          <div class="gloss-stage">
+            <span class="gloss-stage__no">04 — Finish</span>
+            <span class="gloss-stage__name">Final inspection</span>
+            <span class="gloss-stage__desc">Lit panel-by-panel check before keys go back.</span>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
-  <hr class="divider">
-
-  <!-- About -->
-  <main class="about">
-    <div class="container">
-      <p class="about__label">About</p>
-      <h2 class="about__heading">Detailing done right — not just a quick wash</h2>
-      <p class="about__text">
-        GP Autocare is a professional auto detailing shop dedicated to bringing back that new-car
-        feeling. We go beyond the surface — meticulous interior and exterior detailing, paint care,
-        and finishing that restores your vehicle to its best.
-      </p>
-      <p class="about__text">
-        We work with proud car owners — everyday drivers, busy professionals, and enthusiasts alike —
-        who want their vehicle to look and feel its best, and who are happy to invest in doing it
-        right rather than settling for shortcuts.
-      </p>
-      <a class="about__cta" href="#contact">Get in touch</a>
+  <!-- Services / who we serve -->
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="cards-head reveal">
+        <div class="section__head">
+          <p class="eyebrow">What we detail</p>
+          <h2 class="section__title">Built for every kind of <span class="serif">car</span></h2>
+        </div>
+        <a class="btn btn--ghost" href="#packages">See all services</a>
+      </div>
+      <div class="cards-row">
+        <article class="scard reveal">
+          <div class="scard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l1.5-4.5A2 2 0 0 1 8.4 7h7.2a2 2 0 0 1 1.9 1.5L19 13"/><path d="M5 13h14v4H5zM7 17v2M17 17v2"/><circle cx="7.5" cy="15" r=".8" fill="currentColor"/><circle cx="16.5" cy="15" r=".8" fill="currentColor"/></svg></div>
+          <div>
+            <span class="scard__tag">Daily Drivers</span>
+            <h3 class="scard__title">Everyday cars</h3>
+            <p class="scard__desc">Commuter-grade grime, pet hair, and coffee spills — reset to factory-fresh.</p>
+          </div>
+        </article>
+        <article class="scard reveal">
+          <div class="scard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 6.5L21 9l-5 4.2L17.6 20 12 16.5 6.4 20 8 13.2 3 9l6.6-.5z"/></svg></div>
+          <div>
+            <span class="scard__tag">Luxury & Exotic</span>
+            <h3 class="scard__title">Show-quality finish</h3>
+            <p class="scard__desc">Multi-stage correction and coating for paint that deserves the extra care.</p>
+          </div>
+        </article>
+        <article class="scard reveal">
+          <div class="scard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4l-2 5h4l-6 11 2-7H8z"/></svg></div>
+          <div>
+            <span class="scard__tag">Enthusiast Builds</span>
+            <h3 class="scard__title">Project & weekend cars</h3>
+            <p class="scard__desc">Engine bays, wheels off, and the details judges actually look for.</p>
+          </div>
+        </article>
+        <article class="scard reveal">
+          <div class="scard__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18M7 14h4"/></svg></div>
+          <div>
+            <span class="scard__tag">Fleet & Family</span>
+            <h3 class="scard__title">More than one</h3>
+            <p class="scard__desc">Recurring plans that keep every vehicle in the driveway looking sharp.</p>
+          </div>
+        </article>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- Process -->
+  <section class="section process process--scroll" id="process">
+    <div class="process__track">
+     <div class="process__sticky">
+      <div class="wrap">
+      <div class="process__head reveal">
+        <p class="eyebrow">How we work</p>
+        <h2 class="section__title">A process you can <span class="serif">trust</span></h2>
+        <p class="section__sub">Every car moves through the same disciplined sequence. Tap a step to see what happens at the bench.</p>
+      </div>
+      <div class="process__grid">
+        <div class="process__panel reveal">
+          <p class="process__panel-label" id="proc-label">Step 01</p>
+          <h3 class="process__panel-title" id="proc-title">Inspect & assess</h3>
+          <p class="process__panel-body" id="proc-body">We walk the car under dedicated lighting, log existing swirls, scratches and trouble spots, and agree on the plan before a single mitt touches the paint.</p>
+          <div class="process__chips" id="proc-chips">
+            <span class="chip">Paint-depth reading</span>
+            <span class="chip">Defect map</span>
+            <span class="chip">Written quote</span>
+          </div>
+        </div>
+        <ol class="steps" id="steps" role="tablist" aria-label="Detailing process">
+          <li class="step" role="tab" aria-selected="true" tabindex="0"
+              data-label="Step 01" data-title="Inspect & assess"
+              data-body="We walk the car under dedicated lighting, log existing swirls, scratches and trouble spots, and agree on the plan before a single mitt touches the paint."
+              data-chips="Paint-depth reading,Defect map,Written quote">
+            <span class="step__no">01</span>
+            <div><div class="step__name">Inspect & assess</div><div class="step__desc">Lighting, paint readings, and an honest plan.</div></div>
+          </li>
+          <li class="step" role="tab" aria-selected="false" tabindex="0"
+              data-label="Step 02" data-title="Decontaminate"
+              data-body="A safe wash, iron fallout removal and clay-bar treatment strip embedded contaminants so the surface is truly clean before we refine it."
+              data-chips="Foam pre-soak,Iron remover,Clay treatment">
+            <span class="step__no">02</span>
+            <div><div class="step__name">Decontaminate</div><div class="step__desc">Strip bonded grime down to bare, clean paint.</div></div>
+          </li>
+          <li class="step" role="tab" aria-selected="false" tabindex="0"
+              data-label="Step 03" data-title="Correct & refine"
+              data-body="Machine polishing in measured stages removes swirls, water spots and oxidation, restoring depth and a true mirror reflection to the finish."
+              data-chips="Compound,Polish,Gloss refinement">
+            <span class="step__no">03</span>
+            <div><div class="step__name">Correct & refine</div><div class="step__desc">Multi-stage polishing for real, lasting clarity.</div></div>
+          </li>
+          <li class="step" role="tab" aria-selected="false" tabindex="0"
+              data-label="Step 04" data-title="Protect & deliver"
+              data-body="A ceramic coating or sealant locks in the gloss and makes future washes easier. We do a final lit inspection, then hand back a car that feels new again."
+              data-chips="Ceramic coating,Interior seal,Final QC">
+            <span class="step__no">04</span>
+            <div><div class="step__name">Protect & deliver</div><div class="step__desc">Lock in the gloss and hand back the keys.</div></div>
+          </li>
+        </ol>
+      </div>
+      </div>
+     </div>
+    </div>
+  </section>
+
+  <!-- Packages -->
+  <section class="section" id="packages">
+    <div class="wrap">
+      <div class="process__head reveal" style="align-items:center;">
+        <p class="eyebrow">Packages</p>
+        <h2 class="section__title">Detailing tiers, no <span class="serif">guesswork</span></h2>
+        <p class="section__sub">Pick the level of care your car needs today. Every package is hand-finished and quoted up front.</p>
+        <div class="tabs" role="tablist" aria-label="Package categories">
+          <button class="tab" role="tab" aria-selected="true" data-tab="0">Maintenance</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="1">Restoration</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="2">Protection</button>
+        </div>
+      </div>
+
+      <div class="panels">
+        <!-- Maintenance -->
+        <div class="panel" data-panel="0" data-active="true">
+          <article class="pcard reveal">
+            <span class="pcard__badge">Express</span>
+            <h3 class="pcard__name">The Refresh</h3>
+            <p class="pcard__price">$89 <span>/ visit</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Hand wash & dry</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Wheels & tires dressed</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Interior vacuum & wipe</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Glass inside & out</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Book the Refresh</a>
+          </article>
+          <article class="pcard pcard--feature reveal">
+            <span class="pcard__badge">Most booked</span>
+            <h3 class="pcard__name">The Maintenance</h3>
+            <p class="pcard__price">$179 <span>/ visit</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Everything in The Refresh</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Spray sealant top-up</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Interior steam & condition</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Door jambs detailed</li>
+            </ul>
+            <a class="btn btn--primary" href="#contact">Book the Maintenance</a>
+          </article>
+          <article class="pcard reveal">
+            <span class="pcard__badge">Plan</span>
+            <h3 class="pcard__name">The Membership</h3>
+            <p class="pcard__price">$129 <span>/ month</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Two maintenance details monthly</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Priority booking</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Coating-safe products only</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Cancel anytime</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Start a plan</a>
+          </article>
+        </div>
+
+        <!-- Restoration -->
+        <div class="panel" data-panel="1">
+          <article class="pcard reveal">
+            <span class="pcard__badge">One stage</span>
+            <h3 class="pcard__name">Gloss Enhancement</h3>
+            <p class="pcard__price">$349 <span>/ vehicle</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full decontamination wash</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Single-stage machine polish</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Removes ~70% of light swirls</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>6-month sealant</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Book enhancement</a>
+          </article>
+          <article class="pcard pcard--feature reveal">
+            <span class="pcard__badge">Signature</span>
+            <h3 class="pcard__name">Paint Correction</h3>
+            <p class="pcard__price">$749 <span>/ vehicle</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Multi-stage compound & polish</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Removes ~90% of defects</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Wheels-off detail</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Coating-ready finish</li>
+            </ul>
+            <a class="btn btn--primary" href="#contact">Book correction</a>
+          </article>
+          <article class="pcard reveal">
+            <span class="pcard__badge">Inside out</span>
+            <h3 class="pcard__name">Interior Revival</h3>
+            <p class="pcard__price">$299 <span>/ vehicle</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Deep extraction & steam</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Leather clean & condition</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Odor & stain treatment</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>UV trim protection</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Book revival</a>
+          </article>
+        </div>
+
+        <!-- Protection -->
+        <div class="panel" data-panel="2">
+          <article class="pcard reveal">
+            <span class="pcard__badge">Entry coat</span>
+            <h3 class="pcard__name">Ceramic One</h3>
+            <p class="pcard__price">$599 <span>/ vehicle</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Prep polish included</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>1-year ceramic coating</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Hydrophobic finish</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Wheel face coating</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Book Ceramic One</a>
+          </article>
+          <article class="pcard pcard--feature reveal">
+            <span class="pcard__badge">Best value</span>
+            <h3 class="pcard__name">Ceramic Pro</h3>
+            <p class="pcard__price">$1,290 <span>/ vehicle</span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Full paint correction first</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Multi-layer, 5-year coating</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Glass & trim coated</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Warranty & annual check</li>
+            </ul>
+            <a class="btn btn--primary" href="#contact">Book Ceramic Pro</a>
+          </article>
+          <article class="pcard reveal">
+            <span class="pcard__badge">Front end</span>
+            <h3 class="pcard__name">Paint Protection Film</h3>
+            <p class="pcard__price">From $899 <span></span></p>
+            <ul class="pcard__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Self-healing clear film</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Rock-chip protection</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Partial or full coverage</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>10-year film warranty</li>
+            </ul>
+            <a class="btn btn--ghost" href="#contact">Get a PPF quote</a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured product -->
+  <section class="section" id="product">
+    <div class="wrap">
+      <div class="product__panel reveal">
+        <div class="product__grid">
+          <div class="product__visual">
+            <div class="product__mark"><img src="brand_assets/gp-autocare-mark.svg" alt="GP Autocare"></div>
+            <span class="product__kit">Ceramic Pro Kit</span>
+            <span class="product__spec">9H hardness · 5-year</span>
+          </div>
+          <div class="product__content">
+            <p class="eyebrow">Featured product</p>
+            <h2 class="product__title">The take-home <span class="serif">ceramic kit</span></h2>
+            <p class="product__desc">The same glass-hard protection we lay down in the bay, boxed for your own driveway. Seal the paint, bead the rain, and make every wash easier — no experience needed.</p>
+            <ul class="product__list">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>50ml ceramic coating</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Prep spray &amp; panel wipe</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Applicators &amp; suede cloths</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>Step-by-step guide</li>
+            </ul>
+            <div class="product__buy">
+              <a class="btn btn--primary" href="featured-product.html">View the kit
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </a>
+              <div>
+                <div class="product__price">$149 <span>/ kit</span></div>
+                <div class="product__note">Ships free · Lasts 5 years</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Shop the range -->
+  <section class="section shop" id="shop">
+    <div class="wrap">
+      <div class="shop__head reveal">
+        <div class="section__head">
+          <p class="eyebrow">Shop the range</p>
+          <h2 class="section__title">Pro-grade products for the <span class="serif">in-between</span></h2>
+        </div>
+        <a class="btn btn--primary" href="product.html">Shop all products
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+
+      <div class="shop__grid">
+        <a class="shopcat reveal" href="product.html#wash">
+          <div class="shopcat__media">
+            <img src="assets/products/range-wash.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="Thick white snow foam and suds covering a glossy dark car hood during the wash stage">
+          </div>
+          <div class="shopcat__body">
+            <span class="shopcat__no">01</span>
+            <h3 class="shopcat__title">Wash &amp; Decon
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </h3>
+            <p class="shopcat__desc">pH-neutral shampoo, snow foam, iron remover and clay — the safe way to start every detail.</p>
+            <span class="shopcat__count">4 products</span>
+          </div>
+        </a>
+
+        <a class="shopcat reveal" href="product.html#protect">
+          <div class="shopcat__media">
+            <img src="assets/products/range-protect.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="Water beading into tight round droplets on a freshly ceramic-coated glossy black panel">
+          </div>
+          <div class="shopcat__body">
+            <span class="shopcat__no">02</span>
+            <h3 class="shopcat__title">Protect
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </h3>
+            <p class="shopcat__desc">Ceramic coatings, sealants and waxes that lock in gloss and shrug off water and UV.</p>
+            <span class="shopcat__count">3 products</span>
+          </div>
+        </a>
+
+        <a class="shopcat reveal" href="product.html#interior">
+          <div class="shopcat__media">
+            <img src="assets/products/range-interior.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="A clean black leather car seat and dashboard with a detailing brush and microfiber cloth">
+          </div>
+          <div class="shopcat__body">
+            <span class="shopcat__no">03</span>
+            <h3 class="shopcat__title">Interior
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </h3>
+            <p class="shopcat__desc">Cabin cleaners, leather care and glass that leave a finish you can feel — without the heavy fragrance.</p>
+            <span class="shopcat__count">3 products</span>
+          </div>
+        </a>
+
+        <a class="shopcat reveal" href="product.html#tools">
+          <div class="shopcat__media">
+            <img src="assets/products/range-tools.jpg" width="900" height="675" loading="lazy" decoding="async"
+                 alt="Folded plush microfiber towels, foam applicator pads and detailing brushes arranged on dark slate">
+          </div>
+          <div class="shopcat__body">
+            <span class="shopcat__no">04</span>
+            <h3 class="shopcat__title">Tools
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            </h3>
+            <p class="shopcat__desc">Plush towels, foam applicators, brushes and pads chosen to match the products they work with.</p>
+            <span class="shopcat__count">4 products</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Results / bento -->
+  <section class="section results" id="results">
+    <div class="wrap">
+      <div class="results__head reveal">
+        <p class="eyebrow">Real cars, real results</p>
+        <h2 class="section__title">The work speaks for <span class="serif">itself</span></h2>
+      </div>
+      <div class="bento">
+        <div class="stat stat--spot stat--tall reveal">
+          <span class="stat__label">Cars detailed</span>
+          <span class="stat__num">12,000+</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">4.9★</span>
+          <span class="stat__label">Average review</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">9 yrs</span>
+          <span class="stat__label">In the bay</span>
+        </div>
+        <div class="stat stat--spot stat--wide reveal">
+          <span class="stat__num">100% hand-finished</span>
+          <span class="stat__label">No automated brushes, ever</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">48 hr</span>
+          <span class="stat__label">Typical turnaround</span>
+        </div>
+        <div class="stat stat--spot reveal">
+          <span class="stat__num">5-yr</span>
+          <span class="stat__label">Coating warranty</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat__num">3</span>
+          <span class="stat__label">Certified detailers</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" id="reviews">
+    <div class="wrap">
+      <div class="reviews__head reveal">
+        <p class="eyebrow">What owners say</p>
+        <h2 class="section__title">Trusted by people who <span class="serif">love</span> their cars</h2>
+      </div>
+      <div class="reviews__grid">
+        <article class="review review--feature reveal">
+          <div>
+            <div class="review__stars" aria-hidden="true">★★★★★</div>
+            <p class="review__text">"I've owned this car for six years and forgot it could look like this. The correction work pulled out swirls I assumed were permanent — it genuinely looks better than the day I drove it off the lot."</p>
+          </div>
+          <div class="review__who">
+            <span class="avatar">DM</span>
+            <div><div class="review__name">Daniel M.</div><div class="review__car">BMW M4 · Full correction + coating</div></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review__stars" aria-hidden="true">★★★★★</div>
+          <p class="review__text">"Booked the maintenance detail before selling. Buyer paid full asking and said the interior sold them. Worth every cent."</p>
+          <div class="review__who">
+            <span class="avatar">SP</span>
+            <div><div class="review__name">Sarah P.</div><div class="review__car">Audi Q5 · Maintenance</div></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review__stars" aria-hidden="true">★★★★★</div>
+          <p class="review__text">"On the membership plan now. Car stays spotless and I never lift a finger. The hydrophobic finish in the rain is unreal."</p>
+          <div class="review__who">
+            <span class="avatar">JT</span>
+            <div><div class="review__name">Jordan T.</div><div class="review__car">Tesla Model 3 · Membership</div></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review__stars" aria-hidden="true">★★★★★</div>
+          <p class="review__text">"They treated my project truck like a show car — wheels off, engine bay spotless. Took home a trophy that weekend."</p>
+          <div class="review__who">
+            <span class="avatar">RC</span>
+            <div><div class="review__name">Rico C.</div><div class="review__car">'69 C10 · Enthusiast detail</div></div>
+          </div>
+        </article>
+        <article class="review reveal">
+          <div class="review__stars" aria-hidden="true">★★★★★</div>
+          <p class="review__text">"Honest quote, no upsell, and they walked me through the defect map before starting. Rare to find this kind of care."</p>
+          <div class="review__who">
+            <span class="avatar">AL</span>
+            <div><div class="review__name">Amara L.</div><div class="review__car">Lexus RX · Interior revival</div></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section faq" id="faq">
+    <div class="wrap">
+      <div class="faq__head reveal">
+        <p class="eyebrow">Good to know</p>
+        <h2 class="section__title">Got any <span class="serif">questions?</span></h2>
+        <p class="section__sub">The things owners ask us most. Still unsure? Send a message and we'll talk it through.</p>
+      </div>
+      <div class="faq__list">
+        <div class="faq__item" data-open="true">
+          <button class="faq__q" aria-expanded="true">How long does a full detail take?<span class="faq__icon" aria-hidden="true"></span></button>
+          <div class="faq__a"><p>A maintenance detail takes 2–3 hours. Paint correction and coating packages are a full-day or two-day job, since the coating needs time to cure before the car goes back out.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Do you come to me, or do I drop off?<span class="faq__icon" aria-hidden="true"></span></button>
+          <div class="faq__a"><p>Correction and coating work happens in the controlled lighting of our bay. For maintenance details we offer mobile service within the metro area — just pick the option when you book.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">Will paint correction damage my clear coat?<span class="faq__icon" aria-hidden="true"></span></button>
+          <div class="faq__a"><p>No. We take paint-depth readings before polishing and remove only the microns needed to level defects. You get a before-and-after reading so you know exactly what was done.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">How do I keep a ceramic coating looking its best?<span class="faq__icon" aria-hidden="true"></span></button>
+          <div class="faq__a"><p>Wash every couple of weeks with a pH-neutral soap and skip automated brush washes. That's it — the coating does the heavy lifting. Membership plans handle this for you.</p></div>
+        </div>
+        <div class="faq__item">
+          <button class="faq__q" aria-expanded="false">What does it cost?<span class="faq__icon" aria-hidden="true"></span></button>
+          <div class="faq__a"><p>Package pricing is listed above and quoted up front. Final cost depends on vehicle size and paint condition — we confirm everything in writing before we start.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <div class="cta__inner reveal">
+        <h2 class="cta__title">Ready to bring back<br>that <span class="serif">new-car feeling?</span></h2>
+        <p class="cta__sub">Tell us about your car and what you're after. We'll send a clear, no-pressure quote within a day.</p>
+        <div class="cta__actions">
+          <a class="btn btn--primary" href="mailto:hello@gpautocare.com">Book a detail
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn--ghost" href="tel:+10000000000">Call the shop</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer class="footer" id="contact">
-    <div class="container">
-      <div class="footer__inner">
-        <div>
-          <div class="footer__brand">GP <span>Autocare</span></div>
-          <div class="footer__tag">Professional Auto Detailing</div>
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <img src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+          <p>Professional auto detailing that brings back that new-car feeling — done right, by hand, every time.</p>
         </div>
-        <nav class="footer__links">
-          <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
-          <a href="tel:+10000000000">(000) 000-0000</a>
-          <a href="#" target="_blank" rel="noopener">Instagram</a>
-          <a href="#" target="_blank" rel="noopener">Facebook</a>
-        </nav>
+        <div class="footer__cols">
+          <div class="footer__col">
+            <h3>Services</h3>
+            <a href="#packages">Maintenance</a>
+            <a href="#packages">Paint correction</a>
+            <a href="#packages">Ceramic coating</a>
+            <a href="#packages">Interior revival</a>
+          </div>
+          <div class="footer__col">
+            <h3>Shop</h3>
+            <a href="#process">Our process</a>
+            <a href="#reviews">Reviews</a>
+          </div>
+          <div class="footer__col">
+            <h3>Contact</h3>
+            <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>
+            <a href="tel:+10000000000">(000) 000-0000</a>
+            <span>Mon–Sat · 8am–6pm</span>
+          </div>
+        </div>
       </div>
-      <div class="footer__copyright">© 2026 GP Autocare. All rights reserved.</div>
+      <div class="footer__base">
+        <span>© 2026 GP Autocare. All rights reserved.</span>
+        <span>Bringing back that new-car feeling</span>
+      </div>
     </div>
   </footer>
 
   <script>
     (function () {
       var root = document.documentElement;
-      var stored = localStorage.getItem('theme');
-      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-      var theme = stored || (prefersDark ? 'dark' : 'light');
-      root.setAttribute('data-theme', theme);
 
+      /* Theme toggle */
       document.getElementById('theme-toggle').addEventListener('click', function () {
         var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
       });
+
+      /* Mobile nav (hamburger) */
+      var nav = document.querySelector('.nav');
+      var burger = document.getElementById('nav-burger');
+      if (nav && burger) {
+        function setMenu(open) {
+          nav.classList.toggle('open', open);
+          burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+          burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        }
+        burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });
+        document.querySelectorAll('#nav-links a').forEach(function (a) {
+          a.addEventListener('click', function () { setMenu(false); });
+        });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+      }
+
+      /* Process steps */
+      var steps = Array.prototype.slice.call(document.querySelectorAll('#steps .step'));
+      var pLabel = document.getElementById('proc-label');
+      var pTitle = document.getElementById('proc-title');
+      var pBody = document.getElementById('proc-body');
+      var pChips = document.getElementById('proc-chips');
+      var pPanel = document.querySelector('.process__panel');
+      function selectStep(step) {
+        steps.forEach(function (s) { s.setAttribute('aria-selected', s === step ? 'true' : 'false'); });
+        pLabel.textContent = step.dataset.label;
+        pTitle.textContent = step.dataset.title;
+        pBody.textContent = step.dataset.body;
+        pChips.innerHTML = step.dataset.chips.split(',').map(function (c) {
+          return '<span class="chip">' + c + '</span>';
+        }).join('');
+        if (pPanel) { pPanel.classList.remove('swap'); void pPanel.offsetWidth; pPanel.classList.add('swap'); }
+      }
+
+      /* Scroll-driven step progression — pin the section and scrub through cards */
+      var procTrack = document.querySelector('.process__track');
+      var procReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var nSteps = steps.length, procIdx = 0, procBound = false, procTick = false;
+
+      function activateStep(step) {
+        if (procBound && procTrack) {
+          var i = steps.indexOf(step);
+          var dist = procTrack.offsetHeight - window.innerHeight;
+          var y = procTrack.getBoundingClientRect().top + window.pageYOffset + (i + 0.5) / nSteps * dist;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        } else {
+          selectStep(step);
+        }
+      }
+      steps.forEach(function (step) {
+        step.addEventListener('click', function () { activateStep(step); });
+        step.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); activateStep(step); }
+        });
+      });
+
+      function procScroll() {
+        procTick = false;
+        if (!procTrack) return;
+        var dist = procTrack.offsetHeight - window.innerHeight;
+        if (dist <= 0) return;
+        var p = Math.max(0, Math.min(1, -procTrack.getBoundingClientRect().top / dist));
+        var idx = Math.min(nSteps - 1, Math.floor(p * nSteps));
+        if (idx !== procIdx) { procIdx = idx; selectStep(steps[idx]); }
+      }
+      function onProcScroll() { if (!procTick) { procTick = true; requestAnimationFrame(procScroll); } }
+      function setProcMode(on) {
+        if (on && !procBound) { window.addEventListener('scroll', onProcScroll, { passive: true }); procBound = true; procScroll(); }
+        else if (!on && procBound) { window.removeEventListener('scroll', onProcScroll); procBound = false; }
+      }
+      if (!procReduce) {
+        var procMql = window.matchMedia('(min-width: 961px)');
+        setProcMode(procMql.matches);
+        procMql.addEventListener('change', function (e) { setProcMode(e.matches); });
+      }
+
+      /* Package tabs */
+      var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+      var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.setAttribute('aria-selected', t === tab ? 'true' : 'false'); });
+          panels.forEach(function (p) { p.setAttribute('data-active', p.dataset.panel === tab.dataset.tab ? 'true' : 'false'); });
+        });
+      });
+
+      /* FAQ accordion */
+      document.querySelectorAll('.faq__item').forEach(function (item) {
+        var btn = item.querySelector('.faq__q');
+        var ans = item.querySelector('.faq__a');
+        function setOpen(open) {
+          item.setAttribute('data-open', open ? 'true' : 'false');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          ans.style.maxHeight = open ? ans.scrollHeight + 'px' : '0px';
+        }
+        if (item.getAttribute('data-open') === 'true') { setOpen(true); }
+        btn.addEventListener('click', function () {
+          setOpen(item.getAttribute('data-open') !== 'true');
+        });
+      });
+
+      /* Scroll reveal */
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || !('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+      } else {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+      }
+
+      /* Hero — glossy-paint ambient + water-bead cursor (brand: ceramic coating) */
+      (function () {
+        if (reduce) return;
+        var hero = document.querySelector('.hero');
+        var canvas = document.getElementById('hero-fx');
+        if (!hero || !canvas) return;
+        var ctx = canvas.getContext('2d');
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var W = 0, H = 0, t = 0, raf = 0;
+
+        function palette() {
+          var dark = root.getAttribute('data-theme') === 'dark';
+          return dark
+            ? { glow: '46,139,224', mote: '127,180,224', bead: '127,180,224', spec: '243,239,231',
+                glowA: 0.18, moteA: 0.55, orbA: 0.22, comp: 'lighter' }
+            : { glow: '46,139,224', mote: '46,139,224', bead: '46,139,224', spec: '255,255,255',
+                glowA: 0.10, moteA: 0.30, orbA: 0.07, comp: 'source-over' };
+        }
+
+        var orbs = [], motes = [];
+        function buildOrbs() {
+          orbs = [];
+          for (var i = 0; i < 3; i++) {
+            orbs.push({
+              bx: (0.22 + 0.28 * i) * W, by: (0.30 + 0.22 * (i % 2)) * H,
+              r: Math.max(W, H) * (0.22 + 0.06 * i),
+              ph: i * 2.1, sp: 0.00020 + i * 0.00007, amp: 60 + i * 18
+            });
+          }
+        }
+        function buildMotes() {
+          motes = [];
+          var n = Math.round(Math.min(46, W / 28));
+          for (var i = 0; i < n; i++) {
+            motes.push({
+              x: Math.random() * W, y: Math.random() * H,
+              r: 0.6 + Math.random() * 1.6, vy: 0.06 + Math.random() * 0.18,
+              drift: Math.random() * Math.PI * 2, ds: 0.002 + Math.random() * 0.004,
+              a: 0.2 + Math.random() * 0.6
+            });
+          }
+        }
+
+        var beads = [], MAXB = 60;
+        function addBead(x, y) {
+          if (beads.length >= MAXB) beads.shift();
+          var rr = 5 + Math.random() * 8;
+          beads.push({ x: x, y: y, r0: rr, r: rr * 0.3, life: 0,
+            max: 70 + Math.random() * 45, vy: 0.05 + Math.random() * 0.13, wob: Math.random() * 6.28 });
+        }
+
+        var tx = -999, ty = -999, gx = -999, gy = -999, active = false, lastX = 0, lastY = 0;
+        hero.addEventListener('pointermove', function (e) {
+          var rect = hero.getBoundingClientRect();
+          tx = e.clientX - rect.left; ty = e.clientY - rect.top;
+          if (gx < -900) { gx = tx; gy = ty; lastX = tx; lastY = ty; }
+          active = true;
+          var dx = tx - lastX, dy = ty - lastY;
+          if (dx * dx + dy * dy > 676) { /* ~26px */
+            addBead(tx + (Math.random() * 10 - 5), ty + (Math.random() * 10 - 5));
+            lastX = tx; lastY = ty;
+          }
+        });
+        hero.addEventListener('pointerleave', function () { active = false; });
+
+        function drawBead(x, y, r, a, p) {
+          var g = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.1, x, y, r);
+          g.addColorStop(0, 'rgba(' + p.bead + ',' + (0.05 * a) + ')');
+          g.addColorStop(0.7, 'rgba(' + p.bead + ',' + (0.18 * a) + ')');
+          g.addColorStop(1, 'rgba(' + p.bead + ',' + (0.02 * a) + ')');
+          ctx.fillStyle = g;
+          ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.fill();
+          ctx.strokeStyle = 'rgba(' + p.bead + ',' + (0.5 * a) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath(); ctx.arc(x, y, r, 0, 6.2832); ctx.stroke();
+          ctx.fillStyle = 'rgba(' + p.spec + ',' + (0.85 * a) + ')';
+          ctx.beginPath(); ctx.arc(x - r * 0.32, y - r * 0.34, Math.max(0.8, r * 0.18), 0, 6.2832); ctx.fill();
+        }
+
+        function frame() {
+          t++;
+          var p = palette();
+          ctx.clearRect(0, 0, W, H);
+
+          ctx.globalCompositeOperation = p.comp;
+          for (var i = 0; i < orbs.length; i++) {
+            var o = orbs[i];
+            var ox = o.bx + Math.cos(t * o.sp + o.ph) * o.amp;
+            var oy = o.by + Math.sin(t * o.sp * 1.3 + o.ph) * o.amp * 0.7;
+            var g = ctx.createRadialGradient(ox, oy, 0, ox, oy, o.r);
+            g.addColorStop(0, 'rgba(' + p.glow + ',' + p.orbA + ')');
+            g.addColorStop(1, 'rgba(' + p.glow + ',0)');
+            ctx.fillStyle = g;
+            ctx.beginPath(); ctx.arc(ox, oy, o.r, 0, 6.2832); ctx.fill();
+          }
+          if (active) {
+            gx += (tx - gx) * 0.12; gy += (ty - gy) * 0.12;
+            var cg = ctx.createRadialGradient(gx, gy, 0, gx, gy, 150);
+            cg.addColorStop(0, 'rgba(' + p.glow + ',' + p.glowA + ')');
+            cg.addColorStop(1, 'rgba(' + p.glow + ',0)');
+            ctx.fillStyle = cg;
+            ctx.beginPath(); ctx.arc(gx, gy, 150, 0, 6.2832); ctx.fill();
+          }
+          ctx.globalCompositeOperation = 'source-over';
+
+          for (var m = 0; m < motes.length; m++) {
+            var mo = motes[m];
+            mo.y -= mo.vy; mo.drift += mo.ds; mo.x += Math.cos(mo.drift) * 0.25;
+            if (mo.y < -4) { mo.y = H + 4; mo.x = Math.random() * W; }
+            ctx.fillStyle = 'rgba(' + p.mote + ',' + (mo.a * p.moteA) + ')';
+            ctx.beginPath(); ctx.arc(mo.x, mo.y, mo.r, 0, 6.2832); ctx.fill();
+          }
+
+          for (var b = beads.length - 1; b >= 0; b--) {
+            var d = beads[b];
+            d.life++;
+            var lt = d.life / d.max;
+            if (lt >= 1) { beads.splice(b, 1); continue; }
+            d.r = d.r0 * (0.35 + 0.65 * Math.min(1, lt * 4));
+            d.y += d.vy; d.x += Math.sin(d.wob + lt * 6) * 0.15;
+            var a = lt < 0.2 ? lt / 0.2 : 1 - (lt - 0.2) / 0.8;
+            drawBead(d.x, d.y, d.r, a, p);
+          }
+
+          raf = requestAnimationFrame(frame);
+        }
+
+        function resize() {
+          W = hero.clientWidth; H = hero.clientHeight;
+          canvas.width = W * dpr; canvas.height = H * dpr;
+          canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          buildOrbs(); buildMotes();
+        }
+        var rt;
+        window.addEventListener('resize', function () {
+          clearTimeout(rt); rt = setTimeout(resize, 150);
+        });
+        resize();
+        canvas.classList.add('on');
+        raf = requestAnimationFrame(frame);
+      })();
     })();
   </script>
 
