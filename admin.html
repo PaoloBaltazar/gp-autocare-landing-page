@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submissions — GP Autocare</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      var stored = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersDark ? 'dark' : 'light'));
+    })();
+  </script>
+  <style>
+    :root {
+      /* Brand constants */
+      --ink: #10151C;
+      --ink-2: #0B0F14;
+      --ink-rise: #1B2531;
+      --azure: #2E8BE0;
+      --azure-soft: #7FB4E0;
+      --azure-deep: #1A5C99;
+      --cream: #F3EFE7;
+
+      /* Light theme (default) */
+      --bg: #F6F3EC;
+      --surface: #FFFFFF;
+      --surface-2: #FBF9F3;
+      --text: var(--ink);
+      --text-muted: rgba(16, 21, 28, 0.60);
+      --text-faint: rgba(16, 21, 28, 0.42);
+      --hairline: rgba(16, 21, 28, 0.10);
+      --hairline-strong: rgba(16, 21, 28, 0.18);
+      --eyebrow: var(--azure-deep);
+      --nav-bg: rgba(246, 243, 236, 0.80);
+      --row-hover: rgba(46, 139, 224, 0.05);
+      --shadow: 0 24px 60px -34px rgba(16, 21, 28, 0.34);
+      --shadow-sm: 0 10px 30px -20px rgba(16, 21, 28, 0.40);
+      --logo-light: none;
+      --logo-dark: block;
+    }
+
+    html[data-theme="dark"] {
+      --bg: #0A0E13;
+      --surface: #121922;
+      --surface-2: #0E141B;
+      --text: var(--cream);
+      --text-muted: rgba(243, 239, 231, 0.60);
+      --text-faint: rgba(243, 239, 231, 0.40);
+      --hairline: rgba(243, 239, 231, 0.12);
+      --hairline-strong: rgba(243, 239, 231, 0.20);
+      --eyebrow: var(--azure-soft);
+      --nav-bg: rgba(10, 14, 19, 0.74);
+      --row-hover: rgba(46, 139, 224, 0.08);
+      --shadow: 0 24px 60px -30px rgba(0, 0, 0, 0.7);
+      --shadow-sm: 0 12px 30px -22px rgba(0, 0, 0, 0.8);
+      --logo-light: block;
+      --logo-dark: none;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      transition: background 0.4s ease, color 0.4s ease;
+      min-height: 100vh;
+    }
+
+    .wrap { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .serif {
+      font-family: 'Fraunces', Georgia, 'Times New Roman', serif;
+      font-style: italic; font-weight: 400; color: var(--azure);
+    }
+    .mono {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      letter-spacing: 0.04em;
+    }
+    .eyebrow {
+      font-family: 'IBM Plex Mono', ui-monospace, monospace;
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--eyebrow);
+    }
+
+    /* ---------- Top bar ---------- */
+    .bar {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: saturate(150%) blur(14px);
+      -webkit-backdrop-filter: saturate(150%) blur(14px);
+      background: var(--nav-bg);
+      border-bottom: 1px solid var(--hairline);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .bar__inner { display: flex; align-items: center; justify-content: space-between; height: 76px; gap: 18px; }
+    .brandmark { display: inline-flex; align-items: center; height: 44px; }
+    .brandmark img { height: 44px; width: auto; }
+    .brandmark .logo-light { display: var(--logo-light); }
+    .brandmark .logo-dark { display: var(--logo-dark); }
+    .bar__tag {
+      display: inline-flex; align-items: center; gap: 8px; margin-left: 4px;
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.62rem; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--text-faint);
+      padding: 5px 11px; border: 1px solid var(--hairline-strong); border-radius: 999px;
+    }
+    .bar__tag::before { content: ""; width: 6px; height: 6px; border-radius: 999px; background: var(--azure); }
+    .bar__left { display: flex; align-items: center; gap: 14px; }
+
+    .toggle {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 40px; height: 40px; border: 1px solid var(--hairline-strong);
+      border-radius: 999px; background: transparent; color: var(--text);
+      cursor: pointer; transition: border-color 0.2s ease, color 0.2s ease, transform 0.3s ease; flex: none;
+    }
+    .toggle:hover { border-color: var(--azure); color: var(--azure); transform: rotate(18deg); }
+    .toggle:focus-visible { outline: 2px solid var(--azure); outline-offset: 2px; }
+    .toggle svg { width: 18px; height: 18px; }
+    .toggle .icon-moon { display: none; }
+    html[data-theme="dark"] .toggle .icon-sun { display: none; }
+    html[data-theme="dark"] .toggle .icon-moon { display: block; }
+
+    /* ---------- Header ---------- */
+    .head { padding: 56px 0 32px; }
+    .head__title {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 700;
+      line-height: 1.05; letter-spacing: -0.035em; margin-top: 14px;
+    }
+    .head__title .serif { font-weight: 400; }
+
+    .count {
+      display: flex; align-items: baseline; gap: 12px; margin-top: 22px;
+    }
+    .count__num {
+      font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 700;
+      letter-spacing: -0.03em; line-height: 1; color: var(--azure);
+      font-variant-numeric: tabular-nums;
+    }
+    .count__label {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted);
+    }
+
+    /* ---------- Controls ---------- */
+    .controls { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; }
+    .search { position: relative; flex: 1; min-width: 240px; max-width: 420px; }
+    .search svg {
+      position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+      width: 17px; height: 17px; color: var(--text-faint); pointer-events: none;
+    }
+    .search input {
+      font-family: inherit; font-size: 0.95rem; color: var(--text);
+      width: 100%; padding: 13px 16px 13px 44px;
+      background: var(--surface); border: 1px solid var(--hairline-strong);
+      border-radius: 12px; transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .search input::placeholder { color: var(--text-faint); }
+    .search input:focus {
+      outline: none; border-color: var(--azure);
+      box-shadow: 0 0 0 3px rgba(46, 139, 224, 0.16);
+    }
+    .controls__meta {
+      font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+      letter-spacing: 0.1em; color: var(--text-faint); white-space: nowrap;
+    }
+
+    /* ---------- Table ---------- */
+    .panel {
+      margin: 24px 0 80px; border: 1px solid var(--hairline);
+      border-radius: 18px; background: var(--surface);
+      box-shadow: var(--shadow-sm); overflow: hidden;
+    }
+    .table-scroll { width: 100%; overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 720px; }
+    thead th {
+      text-align: left; font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.64rem; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-faint);
+      padding: 18px 22px; border-bottom: 1px solid var(--hairline);
+      background: var(--surface-2); white-space: nowrap;
+    }
+    tbody td {
+      padding: 18px 22px; border-bottom: 1px solid var(--hairline);
+      font-size: 0.94rem; vertical-align: top;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr { transition: background 0.15s ease; }
+    tbody tr:hover { background: var(--row-hover); }
+
+    .col-date { width: 1%; white-space: nowrap; }
+    .cell-date { font-family: 'IBM Plex Mono', monospace; font-size: 0.8rem; color: var(--text-muted); }
+    .cell-date b { display: block; font-weight: 500; color: var(--text); letter-spacing: 0; }
+    .cell-name { font-weight: 600; letter-spacing: -0.01em; }
+    .cell-email a { color: var(--azure); word-break: break-word; }
+    .cell-email a:hover { text-decoration: underline; }
+    .cell-msg { color: var(--text-muted); max-width: 380px; }
+    .cell-msg.empty { color: var(--text-faint); font-style: italic; }
+
+    mark { background: rgba(46, 139, 224, 0.22); color: inherit; border-radius: 3px; padding: 0 1px; }
+
+    /* ---------- States ---------- */
+    .state { padding: 64px 28px; text-align: center; color: var(--text-muted); }
+    .state__title { font-size: 1.15rem; font-weight: 600; color: var(--text); letter-spacing: -0.01em; }
+    .state__sub { margin-top: 8px; font-size: 0.92rem; max-width: 42ch; margin-left: auto; margin-right: auto; }
+    .state--error .state__title { color: #d9774b; }
+    .spinner {
+      width: 26px; height: 26px; margin: 0 auto 18px; border-radius: 999px;
+      border: 2px solid var(--hairline-strong); border-top-color: var(--azure);
+      animation: spin 0.7s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .btn-retry {
+      margin-top: 20px; font-family: inherit; font-weight: 600; font-size: 0.9rem;
+      cursor: pointer; padding: 11px 20px; border-radius: 999px;
+      background: var(--azure); color: #fff; border: none;
+      transition: background 0.2s ease, transform 0.18s ease;
+    }
+    .btn-retry:hover { background: #2477c2; transform: translateY(-2px); }
+
+    .footnote {
+      margin: -56px 0 64px; font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.06em; color: var(--text-faint);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .footnote svg { width: 14px; height: 14px; flex: none; color: var(--text-faint); }
+
+    /* ---------- Responsive: table → stacked cards ---------- */
+    @media (max-width: 680px) {
+      .wrap { padding: 0 18px; }
+      .head { padding: 40px 0 26px; }
+      table, thead, tbody, tr, td { display: block; width: 100%; }
+      thead { display: none; }
+      table { min-width: 0; }
+      tbody tr {
+        padding: 18px 20px; border-bottom: 1px solid var(--hairline);
+      }
+      tbody tr:hover { background: transparent; }
+      tbody td { border: none; padding: 3px 0; }
+      .cell-date { font-size: 0.72rem; margin-bottom: 6px; }
+      .cell-date b { display: inline; }
+      td.cell-msg { max-width: none; margin-top: 6px; }
+      td::before {
+        content: attr(data-label); display: inline-block; min-width: 64px;
+        font-family: 'IBM Plex Mono', monospace; font-size: 0.6rem;
+        letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-faint);
+        margin-right: 8px;
+      }
+      td.cell-date::before, td.cell-name::before { display: none; }
+      .footnote { margin: -40px 0 48px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.001s !important; animation-duration: 0.001s !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <header class="bar">
+    <div class="wrap bar__inner">
+      <div class="bar__left">
+        <a class="brandmark" href="index.html" aria-label="GP Autocare home">
+          <img class="logo-dark" src="brand_assets/gp-autocare-logo-dark.svg" alt="GP Autocare">
+          <img class="logo-light" src="brand_assets/gp-autocare-logo-light.svg" alt="GP Autocare">
+        </a>
+        <span class="bar__tag">Internal</span>
+      </div>
+      <button class="toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="head">
+      <p class="eyebrow">Booking requests</p>
+      <h1 class="head__title">Submissions</h1>
+
+      <div class="count">
+        <span class="count__num" id="count-num">—</span>
+        <span class="count__label" id="count-label">submissions</span>
+      </div>
+
+      <div class="controls">
+        <label class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="search" placeholder="Search by name or email" autocomplete="off" aria-label="Search submissions by name or email" disabled>
+        </label>
+        <span class="controls__meta" id="result-meta" aria-live="polite"></span>
+      </div>
+    </div>
+
+    <section class="panel" aria-label="Submissions table">
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-date">Date</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr><td colspan="4">
+              <div class="state" id="state">
+                <div class="spinner"></div>
+                <div class="state__title">Loading submissions…</div>
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="footnote">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      Internal page — not linked from the site. Read via the Supabase anon key, which is visible in this page's source.
+    </p>
+  </main>
+
+  <script type="module">
+    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+    /* These are the public anon credentials — by design they ship to the browser.
+       This page can read every row because RLS is disabled on `signups`; anyone
+       who opens it (or reads the source) can see all submissions. Keep the URL private. */
+    const SUPABASE_URL = 'https://xjuttyxeulxqnwpomhgk.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqdXR0eXhldWx4cW53cG9taGdrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIyOTIzMDYsImV4cCI6MjA5Nzg2ODMwNn0.-yBJufkFt7s0Vy3nQO__pQm2TPpby2wMl2f7pfa4_Ug';
+
+    /* Theme toggle */
+    const root = document.documentElement;
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    const rowsEl = document.getElementById('rows');
+    const countNum = document.getElementById('count-num');
+    const countLabel = document.getElementById('count-label');
+    const resultMeta = document.getElementById('result-meta');
+    const searchEl = document.getElementById('search');
+
+    let all = [];
+
+    const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => (
+      { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]
+    ));
+
+    function fmtDate(iso) {
+      const d = new Date(iso);
+      if (isNaN(d)) return { day: '—', time: '' };
+      return {
+        day: d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
+        time: d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+      };
+    }
+
+    /* Highlight the matched query inside name/email cells */
+    function highlight(text, q) {
+      const safe = esc(text);
+      if (!q) return safe;
+      const i = text.toLowerCase().indexOf(q);
+      if (i === -1) return safe;
+      return esc(text.slice(0, i)) + '<mark>' + esc(text.slice(i, i + q.length)) + '</mark>' + esc(text.slice(i + q.length));
+    }
+
+    function showState({ title, sub = '', error = false, retry = false, loading = false }) {
+      rowsEl.innerHTML =
+        '<tr><td colspan="4"><div class="state' + (error ? ' state--error' : '') + '">' +
+        (loading ? '<div class="spinner"></div>' : '') +
+        '<div class="state__title">' + esc(title) + '</div>' +
+        (sub ? '<div class="state__sub">' + esc(sub) + '</div>' : '') +
+        (retry ? '<button class="btn-retry" id="retry" type="button">Try again</button>' : '') +
+        '</div></td></tr>';
+      if (retry) document.getElementById('retry').addEventListener('click', load);
+    }
+
+    function render() {
+      const q = searchEl.value.trim().toLowerCase();
+      const list = q
+        ? all.filter((r) =>
+            (r.name || '').toLowerCase().includes(q) ||
+            (r.email || '').toLowerCase().includes(q))
+        : all;
+
+      resultMeta.textContent = q ? list.length + ' of ' + all.length + ' shown' : '';
+
+      if (!list.length) {
+        showState(q
+          ? { title: 'No matches', sub: 'No submissions match “' + searchEl.value.trim() + '”. Try a different name or email.' }
+          : { title: 'No submissions yet', sub: 'Booking requests from the contact form will appear here.' });
+        return;
+      }
+
+      rowsEl.innerHTML = list.map((r) => {
+        const { day, time } = fmtDate(r.created_at);
+        const msg = (r.message || '').trim();
+        return '<tr>' +
+          '<td class="col-date cell-date" data-label="Date"><b>' + esc(day) + '</b>' + (time ? esc(time) : '') + '</td>' +
+          '<td class="cell-name" data-label="Name">' + highlight(r.name || '—', q) + '</td>' +
+          '<td class="cell-email" data-label="Email"><a href="mailto:' + esc(r.email) + '">' + highlight(r.email || '—', q) + '</a></td>' +
+          '<td class="cell-msg' + (msg ? '' : ' empty') + '" data-label="Message">' + (msg ? esc(msg) : 'No message') + '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    async function load() {
+      showState({ title: 'Loading submissions…', loading: true });
+      try {
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { data, error } = await supabase
+          .from('signups')
+          .select('id, name, email, message, created_at')
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+
+        all = data || [];
+        countNum.textContent = all.length;
+        countLabel.textContent = all.length === 1 ? 'submission' : 'submissions';
+        searchEl.disabled = false;
+        render();
+      } catch (err) {
+        countNum.textContent = '—';
+        searchEl.disabled = true;
+        showState({
+          title: "Couldn't load submissions",
+          sub: (err && err.message) ? err.message : 'Check the Supabase connection and try again.',
+          error: true,
+          retry: true
+        });
+      }
+    }
+
+    searchEl.addEventListener('input', render);
+    load();
+  </script>
+
+</body>
+</html>
