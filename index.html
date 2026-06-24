@@ -457,6 +457,8 @@
     .book__alt { font-size: 0.86rem; color: rgba(243,239,231,0.6); }
     .book__alt a { color: var(--azure-soft); font-weight: 600; }
     .book__alt a:hover { color: #fff; }
+    .book__err { display: none; margin-top: 2px; font-family: 'IBM Plex Mono', monospace; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: #f0a17e; }
+    .book__err.show { display: block; }
     .book__ok {
       position: relative; z-index: 1; max-width: 600px; margin: 36px auto 0;
       display: none; gap: 14px; align-items: flex-start; text-align: left;
@@ -1118,13 +1120,14 @@
             </button>
             <span class="book__alt">Prefer to talk? <a href="tel:+14155550142">(415) 555-0142</a></span>
           </div>
+          <p class="book__err" id="booking-error" role="alert" aria-live="assertive"></p>
         </form>
 
         <div class="book__ok" id="booking-ok" role="status" aria-live="polite">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
           <div>
-            <h3>Your request is ready to send</h3>
-            <p>Your email app should have opened with the details filled in — just hit send and we'll reply with a quote within a day. If it didn't, email us at <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>.</p>
+            <h3>Request sent</h3>
+            <p>Thanks — we've got your details and we'll reply with a quote within a day. Prefer to talk now? Email us at <a href="mailto:hello@gpautocare.com">hello@gpautocare.com</a>.</p>
           </div>
         </div>
       </div>
@@ -1280,28 +1283,57 @@
         });
       });
 
-      /* Booking form — composes a pre-filled quote email (no backend on this static site) */
+      /* Booking form — posts the request to the serverless function, which saves it to Supabase */
       (function () {
         var form = document.getElementById('booking-form');
         var ok = document.getElementById('booking-ok');
         if (!form || !ok) { return; }
+        var err = document.getElementById('booking-error');
+        var submitBtn = form.querySelector('button[type="submit"]');
+        var submitMarkup = submitBtn ? submitBtn.innerHTML : '';
+
+        function showError(msg) {
+          if (!err) { return; }
+          err.textContent = msg;
+          err.classList.add('show');
+        }
+
         form.addEventListener('submit', function (e) {
           e.preventDefault();
           if (!form.checkValidity()) { form.reportValidity(); return; }
+          if (err) { err.classList.remove('show'); }
+
           var f = form.elements;
-          var lines = [
-            'Name: ' + f.name.value,
-            'Email: ' + f.email.value,
-            '',
-            f.message.value
-          ];
-          var subject = 'Detail booking — ' + (f.name.value || 'new request');
-          var href = 'mailto:hello@gpautocare.com?subject=' + encodeURIComponent(subject) +
-                     '&body=' + encodeURIComponent(lines.join('\n'));
-          window.location.href = href;
-          form.style.display = 'none';
-          ok.classList.add('show');
-          ok.focus && ok.focus();
+          var payload = {
+            name: f.name.value.trim(),
+            email: f.email.value.trim(),
+            message: f.message.value.trim()
+          };
+
+          if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+
+          fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          })
+            .then(function (res) {
+              return res.json().catch(function () { return {}; }).then(function (data) {
+                return { res: res, data: data };
+              });
+            })
+            .then(function (r) {
+              if (!r.res.ok || !r.data.ok) {
+                throw new Error((r.data && r.data.error) || 'Something went wrong. Please try again.');
+              }
+              form.style.display = 'none';
+              ok.classList.add('show');
+              ok.focus && ok.focus();
+            })
+            .catch(function (error) {
+              if (submitBtn) { submitBtn.disabled = false; submitBtn.innerHTML = submitMarkup; }
+              showError(error.message || 'Something went wrong. Please try again.');
+            });
         });
       })();
 
