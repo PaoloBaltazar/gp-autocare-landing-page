@@ -1108,30 +1108,9 @@
               <input type="email" id="bk-email" name="email" autocomplete="email" placeholder="you@email.com" required>
             </div>
           </div>
-          <div class="book__row">
-            <div class="field">
-              <label for="bk-phone">Phone <span style="text-transform:none;letter-spacing:0;opacity:0.6;">(optional)</span></label>
-              <input type="tel" id="bk-phone" name="phone" autocomplete="tel" placeholder="(415) 555-0142">
-            </div>
-            <div class="field">
-              <label for="bk-service">What you're after</label>
-              <select id="bk-service" name="service">
-                <option value="Maintenance detail">Maintenance detail</option>
-                <option value="Paint correction">Paint correction</option>
-                <option value="Ceramic coating">Ceramic coating</option>
-                <option value="Interior revival">Interior revival</option>
-                <option value="Paint protection film">Paint protection film</option>
-                <option value="Not sure yet">Not sure yet — help me choose</option>
-              </select>
-            </div>
-          </div>
           <div class="field">
-            <label for="bk-vehicle">Your car</label>
-            <input type="text" id="bk-vehicle" name="vehicle" placeholder="e.g. 2019 BMW M4, black">
-          </div>
-          <div class="field">
-            <label for="bk-message">Anything else?</label>
-            <textarea id="bk-message" name="message" placeholder="Tell us about the paint, any trouble spots, or when you'd like to come in."></textarea>
+            <label for="bk-message">Message</label>
+            <textarea id="bk-message" name="message" placeholder="Tell us about your car and what you're after." required></textarea>
           </div>
           <div class="book__submit">
             <button class="btn btn--primary" type="submit">Send booking request
@@ -1313,11 +1292,8 @@
           var lines = [
             'Name: ' + f.name.value,
             'Email: ' + f.email.value,
-            'Phone: ' + (f.phone.value || '—'),
-            'Service: ' + f.service.value,
-            'Vehicle: ' + (f.vehicle.value || '—'),
             '',
-            (f.message.value || '(no extra details)')
+            f.message.value
           ];
           var subject = 'Detail booking — ' + (f.name.value || 'new request');
           var href = 'mailto:hello@gpautocare.com?subject=' + encodeURIComponent(subject) +
